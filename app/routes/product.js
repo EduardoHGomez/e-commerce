@@ -51,7 +51,10 @@ router.post('/cart', (req, res) => {
         const areUuidsValid = carrito.validateUuids(uuids);
 
         if (areUuidsValid === true) { // Aquí areUUidsValid es == true
-            result = {'message': 'Todos los productos se encuentran en el arrelgo :)'};
+            result = {'message': 'Todos los productos se cargaron al carrito de compras'};
+            uuids.forEach((uuid) => {
+                carrito.addItem(uuid); // Añadir al carrito los elementos
+            });
         } else { // Si no es inválido (aquí are UuidsValid tiene el uuid inválido)
             res.statusCode = 404;
             result = {'message': `Producto con uuid ${areUuidsValid} no existe!`};

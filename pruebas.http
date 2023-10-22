@@ -56,42 +56,34 @@ content-type: application/json
 POST http://localhost:3000/admin/products HTTP/1.1
 content-type: application/json
 
-[
-    {
-        "uuid": "f35fc1d5-8e91-4508-895d-01e597bbaeb1",
-        "amount": 100 
-    },
-    {
-        "uuid": "0e56585c-5352-4721-8f7b-6ff7cd30ddd6",
-        "amount": 100 
-    },
-    {
-        "uuid" : "7b1b3842-7707-40e2-9f70-14373be61581",
-        "amount": 100 
-    }
-]
+{
+    "uuid": "aabbccddff-0000-1111-aaaa-bbbbbbb00000",
+    "title": "Mi producto",
+    "description": "Producto de prueba",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/en/b/b8/The_Chemical_Brothers_-_Surrender_album_cover.png",
+    "unit": "Vinyl",
+    "stock": 100,
+    "pricePerUnit": 555.55,
+    "category": "Electronic"
+}
 
 ### 4. admin/products (404) --> Con header pero contraseña incorrecta 
 POST http://localhost:3000/admin/products HTTP/1.1
 content-type: application/json
 x-auth: 'EstaContraseñaEsIncorrecta1234'
 
-[
-    {
-        "uuid": "f35fc1d5-8e91-4508-895d-01e597bbaeb1",
-        "amount": 100 
-    },
-    {
-        "uuid": "0e56585c-5352-4721-8f7b-6ff7cd30ddd6",
-        "amount": 100 
-    },
-    {
-        "uuid" : "7b1b3842-7707-40e2-9f70-14373be61581",
-        "amount": 100 
-    }
-]
+{
+    "uuid": "aabbccddff-0000-1111-aaaa-bbbbbbb00000",
+    "title": "Mi producto",
+    "description": "Producto de prueba",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/en/b/b8/The_Chemical_Brothers_-_Surrender_album_cover.png",
+    "unit": "Vinyl",
+    "stock": 100,
+    "pricePerUnit": 555.55,
+    "category": "Electronic"
+}
 
-### 4. admin/products (201) --> Con x-auth correcto HERE
+### 4. admin/products (201) --> Con x-auth correcto 
 POST http://localhost:3000/admin/products HTTP/1.1
 content-type: application/json
 x-auth: password
