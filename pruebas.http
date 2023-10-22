@@ -117,7 +117,7 @@ x-auth: password
 }
 
 ### 5  admin/products/id Actualizar producto --> Cuando uuid no existe
-PUT http://localhost:3000/admin/products HTTP/1.1
+PUT http://localhost:3000/admin/products/b6de571f-2bfc-4a81-9c4a-53a793fb4453 HTTP/1.1
 content-type: application/json
 x-auth: password
 
