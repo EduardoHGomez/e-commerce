@@ -41,10 +41,25 @@ function createProduct(product) {
 
     previousData = fs.readFileSync(path.resolve(__dirname + '/../data/products.json'), 'utf-8');
     previousData = JSON.parse(previousData);
-    previousData.push(product);
-    console.log(previousData);
+
+    // One way to convert from Object to JSON
+    const new_JSON = 
+    {
+        'uuid': product.uuid,
+        'title': product.title,
+        'description': product.description,
+        'imageUrl': product.imageUrl,
+        'unit': product.unit,
+        'stock': product.stock,
+        'pritcePerUnit': product.pricePerUnit,
+        'category': product.category
+    }
+    // Añadir el JSON al arreglo de previousData
+    previousData.push(new_JSON);
+    previousData = JSON.stringify(previousData);
     
     // Cargar al json de la base de datos
+    fs.writeFileSync(path.resolve(__dirname + '/../data/products.json'), previousData);
 
 }
 
