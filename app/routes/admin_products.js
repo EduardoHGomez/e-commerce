@@ -8,6 +8,7 @@ const router = express.Router();
 // admin/products
 router.post('/products', (req, res) => {
     let result = {};
+    res.setHeader('Content-Type', 'application/json');
 
     // Detectar si el producto ya existe (con base en el uuid)
     const uuid = req.body['uuid'];
@@ -26,6 +27,8 @@ router.post('/products', (req, res) => {
 // admin/products/:id
 router.put('/products/:id', (req, res) => {
     let result = {'message': 'Producto actualizado'};
+    res.setHeader('Content-Type', 'application/json');
+
     // Primero detectar que si el producto no existe, entonces regresar 404
     const uuid = req.params.id;
     const found = dataHandlerFile.getProductsById(uuid);

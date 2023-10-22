@@ -15,8 +15,11 @@ router.get('/', (req, res) => {
 // products/id
 router.get('/:id', (req, res) => {
     let result = {}; // JSON explicando razón del status 
+    res.setHeader('Content-Type', 'application/json');
+
     var query = req.params.id;
     var data = dataHandlerFile.getProductsById(query);
+
 
     // Si no existe el id
     if (!data){
@@ -35,6 +38,7 @@ router.get('/:id', (req, res) => {
 router.post('/cart', (req, res) => {
     body = req.body; // Primero extraer body
     let result = {'message': 'Todo bien'}; // Variable para enviar desde el servidor
+    res.setHeader('Content-Type', 'application/json');
 
     // Comprobar si es arreglo
     if (Array.isArray(body) == false) {
