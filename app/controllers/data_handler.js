@@ -11,7 +11,7 @@ async function getProducts() {
     return data;
 }
 
-async function getProductsById(uuid) {
+function getProductsById(uuid) {
     // Cargar los datos al arreglo
     loadData();
 
@@ -19,9 +19,9 @@ async function getProductsById(uuid) {
     const found = productsForSale.find((product) => product.uuid === uuid);
     if (!found) {
         // Regresar un error de producto no encontrado
-        return {'message': 'Producto no encontrado'}
+        return false;
     } else {
-        return found; // Si encuentra, found ya es el json que regresa
+        return true; // Si encuentra, found ya es el json que regresa
     }
 
 }

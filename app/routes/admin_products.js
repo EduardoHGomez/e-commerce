@@ -14,13 +14,18 @@ router.post('/products', (req, res) => {
 
 // admin/products/:id
 router.put('/products/:id', (req, res) => {
+    let result = {'message': 'Producto actualizado'};
     // Primero detectar que si el producto no existe, entonces regresar 400
-    var uuid = req.body['uuid'];
-    console.log(uuid);
-    // var found = dataHandlerFile.getProductsById(uuid);
+    const uuid = req.params.id;
+    const found = dataHandlerFile.getProductsById(uuid);
+    console.log(found);
+    if (!found) {
+        res.statusCode = 404;
+        result = {'message': 'Producto no encontrado'};
+    }
 
-    res.statusCode = 201;
-    res.send({'message': 'Producto actualizado'});
+    res.send(result);
+
 });
 
 
