@@ -1,10 +1,10 @@
-####
+### 1. GET /products 
 GET  http://localhost:3000/products HTTP/1.1
 
-###
+### 1. GET /products/:id con id inválido
 GET http://localhost:3000/products/123 HTTP/1.1
 
-####
+### 1. GET /products/:id con id válido 
 GET http://localhost:3000/products/7b1b3842-7707-40e2-9f70-14373be61581 HTTP/1.1
 
 ### products/cart cuando no es arreglo

@@ -9,18 +9,26 @@ const router = express.Router();
 // --------------- RUTAS ----------------
 router.get('/', (req, res) => {
     var data = dataHandlerFile.getProducts();
-    data.then((data) => {
-        res.status(200).send(data);
-    });
+    res.status(200).send(data);
 });
 
 // products/id
 router.get('/:id', (req, res) => {
+    let result = {}; // JSON explicando razón del status 
     var query = req.params.id;
-    var dataPromise = dataHandlerFile.getProductsById(query);
-    dataPromise.then((data) => {
-        res.status(200).send(data); 
-    });
+    var data = dataHandlerFile.getProductsById(query);
+
+    // Si no existe el id
+    if (!data){
+        res.statusCode = 404;
+        result = {'message': 'uuid No encontrado!'};
+    } else {
+        res.statusCode = 200;
+        result = data;
+    }
+
+    res.send(result);
+
 });
 
 // products/cart

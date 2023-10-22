@@ -4,7 +4,7 @@ const Product = require(path.resolve(__dirname + '/../controllers/product.js'));
 
 let productsForSale = [];
 
-async function getProducts() {
+function getProducts() {
     data = fs.readFileSync(path.resolve(__dirname + '/../data/products.json'), 'utf-8');
     data = JSON.parse(data);
     productsForSale = data; // El arreglo pasa a ser los datos que obtuvimos
