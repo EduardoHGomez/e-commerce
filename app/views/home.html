@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>E-commerce Edu</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    
+    <!-- Font Awesome Link -->
+    <script src="https://kit.fontawesome.com/fffb4aa0e0.js" crossorigin="anonymous"></script>
+
+    <!-- Modal Ingresar-->
+    <div class="modal fade" id="modal_login" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitleId">Iniciar sesión</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <!-- Form para iniciar sesión -->
+                    <form>
+                        <label for="email_field" class="form-label">Correo</label>
+                        <div class="input-group mb-3">
+                            <input type="email" class="form-control" id="email_field" aria-describedby="emailHelpId" placeholder="Ingresa tu correo" required>
+                            <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
+                        </div>
+                        <label for="password_field" class="form-label">Contraseña</label>
+                        <div class="input-group mb-3">
+                            <input type="password" class="form-control" id="password_field" aria-describedby="emailHelpId" placeholder="Ingresa tu contraseña" required>
+                            <span class="input-group-text"><i class="fa-solid fa-key"></i></span>
+                        </div>
+                        <div style="text-align: center">
+                            <input type="submit" class="btn btn-primary" style="margin: auto" value="Login">
+                        </div>
+                    </form>
+                    
+                </div>
+                <div class="modal-footer">
+
+                    <!-- Motal footer 'Registrate aquí' -->
+                    <div class="input-group mb-3">
+                        <span>
+                            ¿No tienes cuenta? 
+                            <a style="text-decoration: blue" nav-link active" aria-current="page" href="" role="button"
+                            data-bs-toggle="modal" data-bs-target="#modal_register" 
+                            >
+                                Regístrate aquí
+                            </a>
+                        </span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal Registrar -->
+    <form> <!-- Form colocado aquí para que considere todo el modal de 'Registro' y el botón de submit esté en el modal-footer-->
+        <div class="modal fade" id="modal_register" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalTitleId">Registrarse</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                            <div class="form-group mb-3 row">
+                                <div class="col-6">
+                                    <input type="text" class="form-control" id="register_field_name" placeholder="Nombre(s)" required>
+                                </div>
+                                <div class="col-6">
+                                    <input type="text" class="form-control" id="register_field_1" placeholder="Apellido" required>
+                                </div>
+                            </div>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" id="email_field_1" placeholder="Tu correo" required>
+                            </div>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" id="password_field_register" placeholder="Contraseña" required>
+                            </div>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" id="password_field_register_confirmation" placeholder="Confirmar contraseña" required>
+                            </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="submit" class="btn btn-success" value="Registrarse">
+                    </div>
+                </div>
+            </div>
+        </div> <!-- Modal Registrar -->
+    </form>
+    
+
+
+</head>
+
+<body>
+    <header>
+
+        <!-- Nav bar -->
+        <nav class="navbar navbar-expand-lg navbar-dark " style="background-color: rgb(40,44,52);">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/P_01/P01_index.html"><i class="fa-solid fa-compact-disc fa-xl"></i> Inicio</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="P01_abouts_us.html">Sobre nosotros</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Productos 
+                            </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="P01_cat_A.html">Categoría A</a></li>
+                            <li><a class="dropdown-item" href="P01_cat_B.html">Categoría B</a></li>
+                        </ul>
+                        </li>
+                        <li class="nav-item ms-5">
+                            <form class="d-flex">
+                                <input id="form_buscar_2" class="form-control me-2" type="search" placeholder="Buscar productos" aria-label="Search">
+                                <button class="btn btn-outline-light" type="submit">Buscar</button>
+                            </form>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav ms-auto me-5">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="" role="button"
+                            data-bs-toggle="modal" data-bs-target="#modal_login" 
+                            >
+                                <i class="fa-solid fa-user"></i> Ingresar 
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/P_01/P01_cart.html"><i class="fa-solid fa-cart-shopping"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Nav bar -->
+
+    </header>
+
+    <main>
+
+    <!-- Carousel -->
+        <div id="carousel_main" class="carousel slide h-50" data-bs-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-bs-target="#carousel_main" data-bs-slide-to="0" class="active" aria-current="true" aria-label="First slide"></li>
+                <li data-bs-target="#carousel_main" data-bs-slide-to="1" aria-label="Second slide"></li>
+                <li data-bs-target="#carousel_main" data-bs-slide-to="2" aria-label="Third slide"></li>
+            </ol>
+            <div class="carousel-inner" role="listbox">
+                <div class="carousel-item active">
+                    <img src="https://www.redsharknews.com/hubfs/The_sound_of_vinyl_is_just_an_effect.jpg" class="w-100 d-block" alt="First slide">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://media.gq-magazine.co.uk/photos/5d139bc67fcc8e76bb8201d7/16:9/w_2580,c_limit/Record-hp-GQ-7Jun17_istock_b.jpg" class="w-100 d-block" alt="Second slide">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://cdn.5280.com/2023/03/VinylMePlease_Paul-Miller.jpg" class="w-100 d-block" alt="Third slide">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carousel_main" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carousel_main" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+        <!-- Contenedor cards -->
+        <div class="container">
+                <h3>Productos agregados con DOM</h3>
+            <div class="row" id="newProducts">
+
+            </div>
+            <hr>
+            <h3>Productos práctica 1</h3>
+            <div class="row">
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="card">
+                        <img class="card-img-top" src="https://m.media-amazon.com/images/I/91dTLHSQdkL._UF894,1000_QL80_.jpg" alt="Title">
+                        <div class="card-body">
+                            <h4 class="card-title">Currents</h4>
+                            <p class="card-text"><b>Artista: </b>Tame Impala</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="card">
+                        <img class="card-img-top" src="https://upload.wikimedia.org/wikipedia/en/3/31/Tame_Impala_-_Lonerism.png" alt="Title">
+                        <div class="card-body">
+                            <h4 class="card-title">Lonerism</h4>
+                            <p class="card-text"><b>Artista: </b>Tame Impala</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="card">
+                        <img class="card-img-top" src="https://upload.wikimedia.org/wikipedia/en/5/51/Igor_-_Tyler%2C_the_Creator.jpg" alt="Title">
+                        <div class="card-body">
+                            <h4 class="card-title">Igor</h4>
+                            <p class="card-text"><b>Artista: </b>Tyler, the Creator</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="card">
+                        <img class="card-img-top" src="https://upload.wikimedia.org/wikipedia/en/3/3f/Jungle_-_Volcano.png" alt="Title">
+                        <div class="card-body">
+                            <h4 class="card-title">Volcano</h4>
+                            <p class="card-text"><b>Artista: </b>Jungle</p></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="card">
+                        <img class="card-img-top" src="https://www.billboard.com/wp-content/uploads/media/03-Drake-If-Youre-Reading-This-Its-Too-Late-best-album-art-2015-billboard-1500.jpg" alt="Title">
+                        <div class="card-body">
+                            <h4 class="card-title">If You're Reading This It's Too Late</h4>
+                            <p class="card-text"><b>Artista: </b>Drake</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="card">
+                        <img class="card-img-top" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/We%27re_New_Here_cover.svg/1200px-We%27re_New_Here_cover.svg.png" alt="Title">
+                        <div class="card-body">
+                            <h4 class="card-title">We're new here</h4>
+                            <p class="card-text"><b>Arista: </b>Jamie XX</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="card">
+                        <img class="card-img-top" src="https://upload.wikimedia.org/wikipedia/commons/0/00/Beach_House_-_Depression_Cherry.png" alt="Title">
+                        <div class="card-body">
+                            <h4 class="card-title">Depression cherry</h4>
+                            <p class="card-text"><b>Artista: </b>Beach House</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="card">
+                        <img class="card-img-top" src="https://upload.wikimedia.org/wikipedia/en/a/a2/Beach_House_-_Bloom.png" alt="Title">
+                        <div class="card-body">
+                            <h4 class="card-title">Bloom</h4>
+                            <p class="card-text"><b>Artista: </b>Beach House</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="card">
+                        <img class="card-img-top" src="https://media.newyorker.com/photos/597a187cc100c36587d577bf/1:1/w_1193,h_1193,c_limit/Listening-Booth-Tyler-the-Creator-Where-This-Flower-Blooms.jpg" alt="Title">
+                        <div class="card-body">
+                            <h4 class="card-title">Flower boy</h4>
+                            <p class="card-text"><b>Artista: </b>Tyler, the Creator</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="card">
+                        <img class="card-img-top" src="https://i.scdn.co/image/ab67616d0000b273aaeb5c9fb6131977995b7f0e" alt="Title">
+                        <div class="card-body">
+                            <h4 class="card-title">Minecraft Volume Alpha</h4>
+                            <p class="card-text"><b>Artista: </b>C418</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="card">
+                        <img class="card-img-top" src="https://m.media-amazon.com/images/I/611z-ZSvhvL._UF894,1000_QL80_.jpg" alt="Title">
+                        <div class="card-body">
+                            <h4 class="card-title">Minecraft Volume Beta</h4>
+                            <p class="card-text"><b>Artista: </b>C418</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>        
+
+
+
+    </main>
+    <footer>
+        <!-- place footer here -->
+        <nav aria-label="page navigation">
+        <ul class="pagination justify-content-center">
+            <li class="page-item disabled">
+            <a class="page-link" href="#" aria-label="previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+            </li>
+            <li class="page-item active" aria-current="page"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+            <a class="page-link" href="#" aria-label="next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+            </li>
+        </ul>
+        </nav>
+    </footer>
+    <!-- Bootstrap JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+        integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
+    </script>
+   
+
+    <!-- Scripts segunda práctica -->
+    <h1>Hola</h1>
+
+</body>
+
+</html>

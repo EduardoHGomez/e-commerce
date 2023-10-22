@@ -1,0 +1,117 @@
+####
+GET  http://localhost:3000/products HTTP/1.1
+
+###
+GET http://localhost:3000/products/123 HTTP/1.1
+
+####
+GET http://localhost:3000/products/7b1b3842-7707-40e2-9f70-14373be61581 HTTP/1.1
+
+### products/cart cuando no es arreglo
+POST http://localhost:3000/products/cart HTTP/1.1
+content-type: application/json
+
+{
+    "uuid": "sample",
+    "amount": 3 
+}
+
+### products/cart arreglo
+POST http://localhost:3000/products/cart HTTP/1.1
+content-type: application/json
+
+[{
+    "uuid": "sample",
+    "amount": 3 
+}]
+
+
+### products/cart uuid inexistente 
+POST http://localhost:3000/products/cart HTTP/1.1
+content-type: application/json
+
+[{
+    "uuid": "f35fc1d5-8e91-4508-895d-01e597bbaeb1",
+    "amount": 5
+},
+{
+    "uuid": "0e56585c-5352-4721-8f7b-6ff7cd30ddd6HHHH",
+    "amount": 3
+},
+{
+    "uuid" : "7b1b3842-7707-40e2-9f70-14373be61581",
+    "amount": 2
+}
+]
+
+### products/cart uuids válidos (existentes)
+POST http://localhost:3000/products/cart HTTP/1.1
+content-type: application/json
+
+[{
+    "uuid": "f35fc1d5-8e91-4508-895d-01e597bbaeb1",
+    "amount": 5
+},
+{
+    "uuid": "0e56585c-5352-4721-8f7b-6ff7cd30ddd6",
+    "amount": 3
+},
+{
+    "uuid" : "7b1b3842-7707-40e2-9f70-14373be61581",
+    "amount": 2
+}
+]
+
+###  4 admin/products Sin el header
+POST http://localhost:3000/admin/products HTTP/1.1
+content-type: application/json
+
+[
+    {
+        "uuid": "f35fc1d5-8e91-4508-895d-01e597bbaeb1",
+        "amount": 100 
+    },
+    {
+        "uuid": "0e56585c-5352-4721-8f7b-6ff7cd30ddd6",
+        "amount": 100 
+    },
+    {
+        "uuid" : "7b1b3842-7707-40e2-9f70-14373be61581",
+        "amount": 100 
+    }
+]
+
+### 4 admin/products Con header pero incorrecto
+POST http://localhost:3000/admin/products HTTP/1.1
+content-type: application/json
+x-auth: 'EstaContraseñaEsIncorrecta1234'
+
+[
+    {
+        "uuid": "f35fc1d5-8e91-4508-895d-01e597bbaeb1",
+        "amount": 100 
+    },
+    {
+        "uuid": "0e56585c-5352-4721-8f7b-6ff7cd30ddd6",
+        "amount": 100 
+    },
+    {
+        "uuid" : "7b1b3842-7707-40e2-9f70-14373be61581",
+        "amount": 100 
+    }
+]
+
+### 4 admin/products Con x-auth correcto
+POST http://localhost:3000/admin/products HTTP/1.1
+content-type: application/json
+x-auth: password
+
+{
+    "title": "Mi producto",
+    "description": "Producto de prueba",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/en/b/b8/The_Chemical_Brothers_-_Surrender_album_cover.png",
+    "unit": "Vinyl",
+    "stock": 100,
+    "pricePerUnit": 555.55,
+    "category": "Electronic"
+}
