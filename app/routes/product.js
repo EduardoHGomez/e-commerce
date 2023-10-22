@@ -40,25 +40,26 @@ router.post('/cart', (req, res) => {
     if (Array.isArray(body) == false) {
         res.statusCode = 400;
         result = {'message': 'No es un arreglo!'};
-    }
+    } else { // Si es un arreglo, entonces ejecutar lo siguiente 
 
-    // Comprobar que el uuid existe
-    // 1. Del arreglo de Objetos, extraer y almacenar los uuids
-    const uuids = body.map(obj => obj.uuid);
+        // Comprobar que el uuid existe
+        // 1. Del arreglo de Objetos, extraer y almacenar los uuids
+        const uuids = body.map(obj => obj.uuid);
 
-    // 2. Buscar si alguno de los uuids no existe. Si se cumple, regresar 404
-    carrito = new ShoppingCart();
-    const areUuidsValid = carrito.validateUuids(uuids);
+        // 2. Buscar si alguno de los uuids no existe. Si se cumple, regresar 404
+        carrito = new ShoppingCart();
+        const areUuidsValid = carrito.validateUuids(uuids);
 
-    if (areUuidsValid === true) {
-        result = {'message': 'Todos los productos se encuentran en el arrelgo :)'};
-    } else {
-        res.statusCode = 404;
-        result = {'message': `Producto con uuid ${areUuidsValid} no existe!`};
+        if (areUuidsValid === true) { // Aquí areUUidsValid es == true
+            result = {'message': 'Todos los productos se encuentran en el arrelgo :)'};
+        } else { // Si no es inválido (aquí are UuidsValid tiene el uuid inválido)
+            res.statusCode = 404;
+            result = {'message': `Producto con uuid ${areUuidsValid} no existe!`};
+        }
     }
 
     // Hasta este punto todo bien, por lo tanto regresar el arreglo
-    res.status(200).send(body);
+    res.send(result);
 
 });
 

@@ -1,13 +1,13 @@
-### 1. GET /products 
+### 1. GET /products (200)
 GET  http://localhost:3000/products HTTP/1.1
 
-### 1. GET /products/:id con id inválido
+### 2. GET /products/:id (404) --> Con id inválido
 GET http://localhost:3000/products/123 HTTP/1.1
 
-### 1. GET /products/:id con id válido 
+### 2. GET /products/:id (200) --> Con id válido 
 GET http://localhost:3000/products/7b1b3842-7707-40e2-9f70-14373be61581 HTTP/1.1
 
-### products/cart cuando no es arreglo
+### 3. POST products/cart  (400) --> Cuando no es un arreglo
 POST http://localhost:3000/products/cart HTTP/1.1
 content-type: application/json
 
@@ -16,51 +16,37 @@ content-type: application/json
     "amount": 3 
 }
 
-### products/cart arreglo
+### 3. POST products/cart (404) --> Cuando se envía un arreglo cuyo uuid no existe
 POST http://localhost:3000/products/cart HTTP/1.1
 content-type: application/json
 
-[{
-    "uuid": "sample",
-    "amount": 3 
-}]
-
-
-### products/cart uuid inexistente 
-POST http://localhost:3000/products/cart HTTP/1.1
-content-type: application/json
-
-[{
-    "uuid": "f35fc1d5-8e91-4508-895d-01e597bbaeb1",
-    "amount": 5
-},
-{
-    "uuid": "0e56585c-5352-4721-8f7b-6ff7cd30ddd6HHHH",
-    "amount": 3
-},
-{
-    "uuid" : "7b1b3842-7707-40e2-9f70-14373be61581",
-    "amount": 2
-}
+[
+    {
+        "uuid": "0000-este-uuid-no-existe",
+        "amount": 3 
+    }
 ]
 
-### products/cart uuids válidos (existentes)
+
+### 3. POST products/cart (200) --> Con todos los uuids existentes
 POST http://localhost:3000/products/cart HTTP/1.1
 content-type: application/json
 
-[{
-    "uuid": "f35fc1d5-8e91-4508-895d-01e597bbaeb1",
-    "amount": 5
-},
-{
-    "uuid": "0e56585c-5352-4721-8f7b-6ff7cd30ddd6",
-    "amount": 3
-},
-{
-    "uuid" : "7b1b3842-7707-40e2-9f70-14373be61581",
-    "amount": 2
-}
+[
+    {
+        "uuid": "f35fc1d5-8e91-4508-895d-01e597bbaeb1",
+        "amount": 5
+    },
+    {
+        "uuid": "0e56585c-5352-4721-8f7b-6ff7cd30ddd6",
+        "amount": 3
+    },
+    {
+        "uuid" : "7b1b3842-7707-40e2-9f70-14373be61581",
+        "amount": 2
+    }
 ]
+
 
 ###  4 admin/products Sin el header
 POST http://localhost:3000/admin/products HTTP/1.1
