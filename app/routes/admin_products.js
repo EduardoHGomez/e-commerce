@@ -18,10 +18,14 @@ router.put('/products/:id', (req, res) => {
     // Primero detectar que si el producto no existe, entonces regresar 400
     const uuid = req.params.id;
     const found = dataHandlerFile.getProductsById(uuid);
-    console.log(found);
+
     if (!found) {
         res.statusCode = 404;
         result = {'message': 'Producto no encontrado'};
+    } else {
+        res.statusCode = 200;
+        new_data = req.body;
+        dataHandlerFile.updateProduct(uuid, new_data);
     }
 
     res.send(result);

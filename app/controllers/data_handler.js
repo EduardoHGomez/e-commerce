@@ -79,6 +79,11 @@ function updateProduct(uuid, updatedProduct) {
         productsForSale[productIndex].pricePerUnit = updatedProduct.pricePerUnit;
         productsForSale[productIndex].category = updatedProduct.category;
     }
+
+    // Write on the file
+    const newJSON = JSON.stringify(productsForSale);
+    fs.writeFileSync(path.resolve(__dirname + '/../data/products.json'), newJSON);
+
 }
 
 function deleteProduct(uuid) {
@@ -160,3 +165,4 @@ exports.getProducts = getProducts;
 exports.getProductsById = getProductsById;
 exports.createProduct = createProduct;
 exports.loadData= loadData;
+exports.updateProduct = updateProduct;
