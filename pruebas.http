@@ -115,3 +115,19 @@ x-auth: password
     "pricePerUnit": 555.55,
     "category": "Electronic"
 }
+
+### 5  admin/products/id Actualizar producto --> Cuando uuid no existe
+PUT http://localhost:3000/admin/products HTTP/1.1
+content-type: application/json
+x-auth: password
+
+{
+    "uuid": "b6de571f-2bfc-4a81-9c4a-53a793fb4453",
+    "title": "Mi producto",
+    "description": "Producto de prueba",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/en/b/b8/The_Chemical_Brothers_-_Surrender_album_cover.png",
+    "unit": "Vinyl",
+    "stock": 100,
+    "pricePerUnit": 555.55,
+    "category": "Electronic"
+}
