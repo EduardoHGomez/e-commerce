@@ -7,6 +7,7 @@ const router = express.Router();
 
 // admin/products
 router.post('/products', (req, res) => {
+    // Hace falta cuando regresa 404
     res.statusCode = 201;
     let new_product = dataHandlerFile.createProduct(req.body);
     res.send({'message': 'Producto cargado'});

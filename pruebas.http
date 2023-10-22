@@ -22,6 +22,10 @@ content-type: application/json
 
 [
     {
+        "uuid" : "7b1b3842-7707-40e2-9f70-14373be61581",
+        "amount": 2
+    },
+    {
         "uuid": "0000-este-uuid-no-existe",
         "amount": 3 
     }
@@ -48,7 +52,7 @@ content-type: application/json
 ]
 
 
-###  4 admin/products Sin el header
+### 4. admin/products (400) --> Sin el header e x-auth
 POST http://localhost:3000/admin/products HTTP/1.1
 content-type: application/json
 
@@ -67,7 +71,7 @@ content-type: application/json
     }
 ]
 
-### 4 admin/products Con header pero incorrecto
+### 4. admin/products (404) --> Con header pero contraseña incorrecta 
 POST http://localhost:3000/admin/products HTTP/1.1
 content-type: application/json
 x-auth: 'EstaContraseñaEsIncorrecta1234'
@@ -87,12 +91,13 @@ x-auth: 'EstaContraseñaEsIncorrecta1234'
     }
 ]
 
-### 4 admin/products Con x-auth correcto
+### 4. admin/products (201) --> Con x-auth correcto HERE
 POST http://localhost:3000/admin/products HTTP/1.1
 content-type: application/json
 x-auth: password
 
 {
+    "uuid": "aabbccddff-0000-1111-aaaa-bbbbbbb00000",
     "title": "Mi producto",
     "description": "Producto de prueba",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/en/b/b8/The_Chemical_Brothers_-_Surrender_album_cover.png",
@@ -102,12 +107,13 @@ x-auth: password
     "category": "Electronic"
 }
 
-### 5  admin/products/id Actualizar producto --> Cuando uuid no existe
+### 5.  admin/products/id Actualizar producto --> Cuando uuid no existe
 PUT http://localhost:3000/admin/products/b6de571f-1111111-hhhh-ooo-lll-aaa HTTP/1.1
 content-type: application/json
 x-auth: password
 
-{
+{ 
+    "uuid": "aabbccddff-0000-1111-aaaa-bbbbbbb00000",
     "title": "Mi producto ACTUALIZADO",
     "description": "Producto de prueba",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/en/b/b8/The_Chemical_Brothers_-_Surrender_album_cover.png",

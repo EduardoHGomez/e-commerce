@@ -1,7 +1,8 @@
 const utilsFile = require('../controllers/utils.js');
 
 class Product {
-    uuid = utilsFile.generateUUID();
+    // Deprecated uuid = utilsFile.generateUUID();
+    uuid;
     title;
     description;
     imageUrl;
@@ -10,7 +11,8 @@ class Product {
     pricePerUnit;
     category;
 
-    constructor(title, description, imageUrl, unit, stock, pricePerUnit, category){
+    constructor(uuid, title, description, imageUrl, unit, stock, pricePerUnit, category){
+        this.uuid = uuid;
         this.title = title;
         this.description = description;
         this.imageUrl = imageUrl;
@@ -22,7 +24,9 @@ class Product {
 
     // ------------ Setters ---------------
     set uuid(uuid){ 
-        throw new ProductException("Product uuids are auto-generated."); // El usuario no puede generarlos
+        this.uuid = uuid;
+        // Deprecated
+        // throw new ProductException("Product uuids are auto-generated."); // El usuario no puede generarlos
     } 
 
     set title(title){
@@ -70,6 +74,7 @@ class Product {
     static createFromJson(jsonValue) {
         var data = JSON.parse(jsonValue);
 
+        uuid = data.uuid;
         title = data.title,
         description = data.description,
         imageUrl = data.imageUrl,
@@ -83,6 +88,7 @@ class Product {
     static createFromObject(obj) {
         let new_object = this.cleanObject(obj); 
 
+        let uuid = new_object.uuid;
         let title = new_object.title;
         let description = new_object.description;
         let imageUrl = new_object.imageUrl;
@@ -90,13 +96,15 @@ class Product {
         let stock = new_object.stock;
         let pricePerUnit = new_object.pricePerUnit;
         let category = new_object.category;
+        console.log(uuid);
 
-        return new Product(title, description, imageUrl, unit, stock, pricePerUnit, category);
+        return new Product(uuid, title, description, imageUrl, unit, stock, pricePerUnit, category);
     }
 
     static cleanObject(obj) {
 
         let cleanObject = {
+            uuid: obj.uuid,
             title: obj.title,
             description:  obj.description,
             imageUrl: obj.imageUrl,
