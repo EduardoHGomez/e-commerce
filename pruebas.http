@@ -131,7 +131,7 @@ x-auth: password
     "category": "Electronic"
 }
 
-### 5  admin/products/id Actualizar producto --> Con uuid correcto 
+### 5  admin/products/id PUT producto --> Con uuid correcto 
 PUT http://localhost:3000/admin/products/b6de571f-2bfc-4a81-9c4a-53a793fb4453 HTTP/1.1
 content-type: application/json
 x-auth: password
@@ -145,3 +145,13 @@ x-auth: password
     "pricePerUnit": 555.55,
     "category": "EDM"
 }
+
+### 6  admin/products/id DELETE producto --> Con uuid incorrecto
+DELETE http://localhost:3000/admin/products/uuid-incorrecto-testing-purposes HTTP/1.1
+content-type: application/json
+x-auth: password
+
+### 6  admin/products/id DELETE producto --> Con uuid correcto
+DELETE http://localhost:3000/admin/products/b6de571f-2bfc-4a81-9c4a-53a793fb4453 HTTP/1.1
+content-type: application/json
+x-auth: password

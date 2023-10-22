@@ -15,7 +15,7 @@ router.post('/products', (req, res) => {
 // admin/products/:id
 router.put('/products/:id', (req, res) => {
     let result = {'message': 'Producto actualizado'};
-    // Primero detectar que si el producto no existe, entonces regresar 400
+    // Primero detectar que si el producto no existe, entonces regresar 404
     const uuid = req.params.id;
     const found = dataHandlerFile.getProductsById(uuid);
 
@@ -26,6 +26,26 @@ router.put('/products/:id', (req, res) => {
         res.statusCode = 200;
         new_data = req.body;
         dataHandlerFile.updateProduct(uuid, new_data);
+    }
+
+    res.send(result);
+
+});
+
+// admin/products/:id
+router.delete('/products/:id', (req, res) => {
+    let result = {};
+    // Primero detectar que si el producto no existe, entonces regresar 404
+    const uuid = req.params.id;
+    const found = dataHandlerFile.getProductsById(uuid);
+
+    if (!found) {
+        res.statusCode = 404;
+        result = {'message': 'Producto no encontrado'};
+    } else {
+        dataHandlerFile.deleteProduct(uuid);
+        res.statusCode = 200;
+        result = {'message': 'Producto eliminado'};
     }
 
     res.send(result);

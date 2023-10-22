@@ -21,7 +21,7 @@ function getProductsById(uuid) {
         // Regresar un error de producto no encontrado
         return false;
     } else {
-        return true; // Si encuentra, found ya es el json que regresa
+        return found; // Si encuentra, found ya es el json que regresa
     }
 
 }
@@ -96,6 +96,10 @@ function deleteProduct(uuid) {
     } else {
         productsForSale.splice(productIndex, 1);
     }
+
+    const newJSON = JSON.stringify(productsForSale);
+    fs.writeFileSync(path.resolve(__dirname + '/../data/products.json'), newJSON);
+
 }
 
 // Opcional
@@ -166,3 +170,4 @@ exports.getProductsById = getProductsById;
 exports.createProduct = createProduct;
 exports.loadData= loadData;
 exports.updateProduct = updateProduct;
+exports.deleteProduct = deleteProduct;
