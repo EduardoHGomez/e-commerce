@@ -9,18 +9,37 @@ const router = express.Router();
 router.post('/products', (req, res) => {
     let result = {};
     res.setHeader('Content-Type', 'application/json');
+    body = req.body;
 
-    // Detectar si el producto ya existe (con base en el uuid)
-    const uuid = req.body['uuid'];
-    const found = dataHandlerFile.getProductsById(uuid);
-    if(found != false) { // El producto ya existe
-        res.statusCode = 400;
-        result = {'message': `Producto con uuid ${uuid} ya existe`};
-    } else { // Si es false, entonces no encontró y se puede crear el producto
-        res.statusCode = 201;
-        let new_product = dataHandlerFile.createProduct(req.body);
-        result = {'message': 'Producto cargado con exitosamente'};
+    // Detectar si tienen los atributos que nos interesan
+    const validAttributes = 
+    ['uuid', 'title', 'description', 'imageUrl', 'unit', 'stock', 'pricePerUnit', 'category'];
+    let areAllValid = true;
+
+    validAttributes.forEach((key) => {
+        if(body[key] === undefined) {
+            // Entra en esta condición si el body le hace falta uno de los atributos
+            areAllValid = false;
+            res.statusCode = 400;
+            result = {'message': `Atributo ${key} faltante`}
+        }
+    });
+
+    if(areAllValid) { // Si el request tiene todos los atributos
+        // Detectar si el producto ya existe (con base en el uuid)
+        const uuid = req.body['uuid'];
+        const found = dataHandlerFile.getProductsById(uuid);
+        if(found != false) { // El producto ya existe
+            res.statusCode = 400;
+            result = {'message': `Producto con uuid ${uuid} ya existe`};
+        } else { // Si es false, entonces no encontró y se puede crear el producto
+            res.statusCode = 201;
+            let new_product = dataHandlerFile.createProduct(req.body);
+            result = {'message': 'Producto cargado con exitosamente'};
+        }
+
     }
+
     res.send(result);
 });
 

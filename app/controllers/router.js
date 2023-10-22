@@ -11,16 +11,17 @@ function validateAdmin(req, res, next) {
     // 1. Comprobar que tenga el header x-auth
     const flag = req.headers['x-auth'];
     let result;
+    res.setHeader('Content-Type', 'application/json');
 
     if (flag === undefined){
-        res.statusCode = 400;
-        result = {'message': 'x-auth no incluido'};
+        res.statusCode = 403;
+        result = {'message': 'Acceso no autorizado, no se cuenta con privilegios de administrador (x-auth no proporcionado)'};
         res.send(result);
-    } else if (flag != 'password') {
+    } else if (flag != 'admin') {
         res.statusCode = 400;
-        result = {'message': 'x-auth incorrecto'};
+        result = {'message': 'Acceso no autorizado, no se cuenta con privilegios de administrador (x-auth incorrecto)'};
         res.send(result);
-    } else if (flag === 'password') {
+    } else if (flag === 'admin') {
         // Avanzar a la siguiente ruta si todo bien
         next();
     }

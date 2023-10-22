@@ -86,7 +86,7 @@ x-auth: 'EstaContraseñaEsIncorrecta1234'
 ### 4. admin/products (201) --> Con x-auth correcto 
 POST http://localhost:3000/admin/products HTTP/1.1
 content-type: application/json
-x-auth: password
+x-auth: admin 
 
 {
     "uuid": "aabbccddff-0000-1111-aaaa-bbbbbbb00000",
@@ -102,7 +102,7 @@ x-auth: password
 ### 5.  admin/products/id Actualizar producto --> Cuando uuid no existe
 PUT http://localhost:3000/admin/products/b6de571f-1111111-hhhh-ooo-lll-aaa HTTP/1.1
 content-type: application/json
-x-auth: password
+x-auth: admin 
 
 { 
     "uuid": "aabbccddff-0000-1111-aaaa-bbbbbbb00000",
@@ -118,7 +118,7 @@ x-auth: password
 ### 5  admin/products/id PUT producto --> Con uuid correcto 
 PUT http://localhost:3000/admin/products/aabbccddff-0000-1111-aaaa-bbbbbbb00000 HTTP/1.1
 content-type: application/json
-x-auth: password
+x-auth: admin 
 
 {
     "title": "ACTUALIZADO Mi producto",
@@ -133,9 +133,9 @@ x-auth: password
 ### 6  admin/products/id DELETE producto --> Con uuid incorrecto
 DELETE http://localhost:3000/admin/products/uuid-incorrecto-testing-purposes HTTP/1.1
 content-type: application/json
-x-auth: password
+x-auth: admin 
 
 ### 6  admin/products/id DELETE producto --> Con uuid correcto
 DELETE http://localhost:3000/admin/products/aabbccddff-0000-1111-aaaa-bbbbbbb00000 HTTP/1.1
 content-type: application/json
-x-auth: password
+x-auth: admin 
