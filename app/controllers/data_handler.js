@@ -174,3 +174,4 @@ exports.createProduct = createProduct;
 exports.loadData= loadData;
 exports.updateProduct = updateProduct;
 exports.deleteProduct = deleteProduct;
+exports.findProduct = findProduct;

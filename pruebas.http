@@ -1,6 +1,16 @@
 ### 1. GET /products (200)
 GET  http://localhost:3000/products HTTP/1.1
 
+### 1. GET /products con query params <category>: <title>
+GET  http://localhost:3000/products?category=Indie&title=Depression+cherry HTTP/1.1
+
+### 1. GET /products con query params <category>: 
+GET  http://localhost:3000/products?category=Indie HTTP/1.1
+
+### 1. GET /products con query params <title> 
+GET  http://localhost:3000/products?title=Lonerism HTTP/1.1
+
+
 ### 2. GET /products/:id (404) --> Con id inválido
 GET http://localhost:3000/products/123 HTTP/1.1
 

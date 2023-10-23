@@ -8,8 +8,34 @@ const router = express.Router();
 
 // --------------- RUTAS ----------------
 router.get('/', (req, res) => {
-    var data = dataHandlerFile.getProducts();
-    res.status(200).send(data);
+    let result = {};
+    res.setHeader('Content-Type', 'application/json');
+
+    // Obtener params
+    let params = req.query;
+    console.log(params.title);
+
+    // Si no tiene query, entonces regresar todos los productos
+    if (Object.keys(params).length === 0) {
+        var data = dataHandlerFile.getProducts();
+        res.statusCode = 200;
+        result = data;
+    } else if (params.title && params.category) { // Si tiene query
+        res.statusCode = 200;
+        result = {'message': 'category and title'};
+    } else if (params.category) {
+        res.statusCode = 200;
+        result = {'message': 'category'};
+    } else if (params.title) {
+        res.statusCode = 200;
+        result = {'message': 'title'};
+    }
+
+
+
+
+    res.send(result);
+
 });
 
 // products/id
@@ -19,7 +45,6 @@ router.get('/:id', (req, res) => {
 
     var query = req.params.id;
     var data = dataHandlerFile.getProductsById(query);
-
 
     // Si no existe el id
     if (!data){
