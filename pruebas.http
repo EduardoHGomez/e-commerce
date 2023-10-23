@@ -82,6 +82,16 @@ x-auth: 'EstaContraseñaEsIncorrecta1234'
     "pricePerUnit": 555.55,
     "category": "Electronic"
 }
+### 4. admin/products (201) --> Con atributos incompletos 
+POST http://localhost:3000/admin/products HTTP/1.1
+content-type: application/json
+x-auth: admin 
+
+{
+    "uuid": "aabbccddff-0000-1111-aaaa-bbbbbbb00000",
+    "title": "Mi producto",
+    "category": "Electronic"
+}
 
 ### 4. admin/products (201) --> Con x-auth correcto 
 POST http://localhost:3000/admin/products HTTP/1.1
@@ -90,7 +100,7 @@ x-auth: admin
 
 {
     "uuid": "aabbccddff-0000-1111-aaaa-bbbbbbb00000",
-    "title": "Mi producto",
+    "title": "Mi nuevo producto",
     "description": "Producto de prueba",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/en/b/b8/The_Chemical_Brothers_-_Surrender_album_cover.png",
     "unit": "Vinyl",
@@ -98,6 +108,7 @@ x-auth: admin
     "pricePerUnit": 555.55,
     "category": "Electronic"
 }
+
 
 ### 5.  admin/products/id Actualizar producto --> Cuando uuid no existe
 PUT http://localhost:3000/admin/products/b6de571f-1111111-hhhh-ooo-lll-aaa HTTP/1.1
@@ -115,13 +126,24 @@ x-auth: admin
     "category": "Electronic"
 }
 
+### 5  admin/products/id PUT producto --> Con atributos incompletos
+PUT http://localhost:3000/admin/products/aabbccddff-0000-1111-aaaa-bbbbbbb00000 HTTP/1.1
+content-type: application/json
+x-auth: admin 
+
+{
+    "title": "Mi producto ACTUALIZADO",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/en/b/b8/The_Chemical_Brothers_-_Surrender_album_cover.png",
+    "stock": 100
+}
+
 ### 5  admin/products/id PUT producto --> Con uuid correcto 
 PUT http://localhost:3000/admin/products/aabbccddff-0000-1111-aaaa-bbbbbbb00000 HTTP/1.1
 content-type: application/json
 x-auth: admin 
 
 {
-    "title": "ACTUALIZADO Mi producto",
+    "title": "Mi producto ACTUALIZADO",
     "description": "Producto de prueba",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/en/b/b8/The_Chemical_Brothers_-_Surrender_album_cover.png",
     "unit": "Vinyl",

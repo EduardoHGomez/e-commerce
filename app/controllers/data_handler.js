@@ -89,6 +89,7 @@ function updateProduct(uuid, updatedProduct) {
 function deleteProduct(uuid) {
     // Primero encontrar el índice
     const productIndex = productsForSale.findIndex((product) => product.uuid === uuid); 
+    const deletedProduct = productsForSale[productIndex].title;
 
     // Si no existe, entonces mostrar error
     if (productIndex === -1){
@@ -99,6 +100,8 @@ function deleteProduct(uuid) {
 
     const newJSON = JSON.stringify(productsForSale);
     fs.writeFileSync(path.resolve(__dirname + '/../data/products.json'), newJSON);
+
+    return deletedProduct;
 
 }
 

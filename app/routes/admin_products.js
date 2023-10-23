@@ -21,7 +21,7 @@ router.post('/products', (req, res) => {
             // Entra en esta condición si el body le hace falta uno de los atributos
             areAllValid = false;
             res.statusCode = 400;
-            result = {'message': `Atributo ${key} faltante`}
+            result = {'message': 'Atributos incompletos!'}
         }
     });
 
@@ -45,21 +45,41 @@ router.post('/products', (req, res) => {
 
 // admin/products/:id
 router.put('/products/:id', (req, res) => {
-    let result = {'message': 'Producto actualizado'};
+    let result = {};
     res.setHeader('Content-Type', 'application/json');
 
-    // Primero detectar que si el producto no existe, entonces regresar 404
-    const uuid = req.params.id;
-    const found = dataHandlerFile.getProductsById(uuid);
+    body = req.body;
+    // Detectar si tienen los atributos que nos interesan
+    const validAttributes = 
+    ['title', 'description', 'imageUrl', 'unit', 'stock', 'pricePerUnit', 'category'];
+    let areAllValid = true;
 
-    if (!found) { // Cuando el producto no se encontró
-        res.statusCode = 404;
-        result = {'message': 'Producto no encontrado'};
-    } else { // Cuando el producto sí se encontró
-        res.statusCode = 200;
-        new_data = req.body;
-        dataHandlerFile.updateProduct(uuid, new_data);
+    validAttributes.forEach((key) => {
+        if(body[key] === undefined) {
+            // Entra en esta condición si el body le hace falta uno de los atributos
+            areAllValid = false;
+            res.statusCode = 400;
+            result = {'message': 'Atributos incompletos!'}
+        }
+    });
+
+    if (areAllValid) {
+        // Primero detectar que si el producto no existe, entonces regresar 404
+        const uuid = req.params.id;
+        const found = dataHandlerFile.getProductsById(uuid);
+
+        if (!found) { // Cuando el producto no se encontró
+            res.statusCode = 404;
+            result = {'message': 'Producto no encontrado'};
+        } else { // Cuando el producto sí se encontró
+            res.statusCode = 200;
+            new_data = req.body;
+            dataHandlerFile.updateProduct(uuid, new_data);
+            result = {'message': `Producto ${new_data['title']}`}
+        }
     }
+
+
 
     res.send(result);
 
@@ -68,6 +88,7 @@ router.put('/products/:id', (req, res) => {
 // admin/products/:id
 router.delete('/products/:id', (req, res) => {
     let result = {};
+    res.setHeader('Content-Type', 'application/json');
     // Primero detectar que si el producto no existe, entonces regresar 404
     const uuid = req.params.id;
     const found = dataHandlerFile.getProductsById(uuid);
@@ -76,9 +97,9 @@ router.delete('/products/:id', (req, res) => {
         res.statusCode = 404;
         result = {'message': 'Producto no encontrado'};
     } else {
-        dataHandlerFile.deleteProduct(uuid);
+        const deletedProduct = dataHandlerFile.deleteProduct(uuid);
         res.statusCode = 200;
-        result = {'message': 'Producto eliminado'};
+        result = {'message': `Producto ${deletedProduct} eliminado`};
     }
 
     res.send(result);
