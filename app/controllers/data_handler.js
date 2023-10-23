@@ -107,6 +107,7 @@ function deleteProduct(uuid) {
 
 // Opcional
 function findProduct(query){
+    loadData();
     // Primero establecer los Regex para cada tipo
 
     const regexCategoryTitle = /<([^>]+)>: <([^>]+)>/; // Regex para "<category>:<Title>"
@@ -116,6 +117,7 @@ function findProduct(query){
     const matchCategoryTitle = query.match(regexCategoryTitle);
     const matchCategory = query.match(regexCategory);
     const matchTitle = query.match(regexTitle);
+    console.log(matchTitle);
 
     // console.log("Matches:", matchCategoryTitle, matchCategory, matchTitle);
     var resultProducts = [];
@@ -129,7 +131,8 @@ function findProduct(query){
             }
         });
         if (resultProducts.length === 0) {
-            return "Productos para <category>: <Title> No encontrados"
+            // Deprecated return "Productos para <category>: <Title> No encontrados"
+            return false;
         }
     } else if (matchCategory) { // Formato <category>:
         const category = matchCategory[1];
@@ -139,7 +142,8 @@ function findProduct(query){
             }
         });
         if (resultProducts.length === 0) {
-            return "Productos para <category>: no encontrados";
+            // Deprecated return "Productos para <category>: no encontrados";
+            return false;
         }
     } else if(matchTitle) { // Formato <Tile>
         const title = matchTitle[1];
@@ -149,7 +153,8 @@ function findProduct(query){
             }
         });
         if (resultProducts.length === 0) {
-            return "Productos para <title> no encontrados";
+            // Deprecated return "Productos para <title> no encontrados";
+            return false;
         }
     } else {
         return "Ningún filtro encontrado!";

@@ -13,7 +13,6 @@ router.get('/', (req, res) => {
 
     // Obtener params
     let params = req.query;
-    console.log(params.title);
 
     // Si no tiene query, entonces regresar todos los productos
     if (Object.keys(params).length === 0) {
@@ -21,18 +20,36 @@ router.get('/', (req, res) => {
         res.statusCode = 200;
         result = data;
     } else if (params.title && params.category) { // Si tiene query
-        res.statusCode = 200;
-        result = {'message': 'category and title'};
+        const query = `<${params.category}>: <${params.title}>`;
+        var data = dataHandlerFile.findProduct(query);
+        if (data) { // Si se encontró algo
+            res.statusCode = 200;
+            result = data;
+        } else {
+            res.statusCode = 404;
+        result = {'message': 'Query para <category>: <title> no encontrado'};
+        }
     } else if (params.category) {
-        res.statusCode = 200;
-        result = {'message': 'category'};
+        const query = `<${params.category}>:` 
+        var data = dataHandlerFile.findProduct(query);
+        if (data) { // Si se encontró algo
+            res.statusCode = 200;
+            result = data;
+        } else {
+            res.statusCode = 404;
+        result = {'message': 'Query para <category>: no encontrado'};
+        }
     } else if (params.title) {
-        res.statusCode = 200;
-        result = {'message': 'title'};
+        const query = `<${params.title}>` 
+        var data = dataHandlerFile.findProduct(query);
+        if (data) { // Si se encontró algo
+            res.statusCode = 200;
+            result = data;
+        } else {
+            res.statusCode = 404;
+            result = {'message': 'Query para <title> no encontrado'};
+        }
     }
-
-
-
 
     res.send(result);
 

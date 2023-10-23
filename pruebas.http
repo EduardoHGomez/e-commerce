@@ -1,14 +1,25 @@
 ### 1. GET /products (200)
 GET  http://localhost:3000/products HTTP/1.1
 
-### 1. GET /products con query params <category>: <title>
-GET  http://localhost:3000/products?category=Indie&title=Depression+cherry HTTP/1.1
+### 1. GET /products con query params <category>: <title> EXISTENTE
+GET  http://localhost:3000/products?category=Indie&title=Bloom HTTP/1.1
 
-### 1. GET /products con query params <category>: 
-GET  http://localhost:3000/products?category=Indie HTTP/1.1
+### 1. GET /products con query params <category>: <title> INEXISTENTE
+GET  http://localhost:3000/products?category=Indie&title=No+existo HTTP/1.1
 
-### 1. GET /products con query params <title> 
-GET  http://localhost:3000/products?title=Lonerism HTTP/1.1
+
+### 1. GET /products con query params <category>: EXISTENTE
+GET  http://localhost:3000/products?category=Videogames HTTP/1.1
+### 1. GET /products con query params <category>: INEXISTENTE 
+GET  http://localhost:3000/products?category=123ABC456 HTTP/1.1
+
+
+### 1. GET /products con query params <title> EXISTENTE
+GET  http://localhost:3000/products?title=Igor HTTP/1.1
+### 1. GET /products con query params <title> INEXISTENTE
+GET  http://localhost:3000/products?title=ABCD1234 HTTP/1.1
+
+
 
 
 ### 2. GET /products/:id (404) --> Con id inválido
@@ -16,6 +27,8 @@ GET http://localhost:3000/products/123 HTTP/1.1
 
 ### 2. GET /products/:id (200) --> Con id válido 
 GET http://localhost:3000/products/7b1b3842-7707-40e2-9f70-14373be61581 HTTP/1.1
+
+
 
 ### 3. POST products/cart  (400) --> Cuando no es un arreglo
 POST http://localhost:3000/products/cart HTTP/1.1
@@ -76,6 +89,8 @@ content-type: application/json
     "pricePerUnit": 555.55,
     "category": "Electronic"
 }
+
+
 
 ### 4. admin/products (404) --> Con header pero contraseña incorrecta 
 POST http://localhost:3000/admin/products HTTP/1.1
