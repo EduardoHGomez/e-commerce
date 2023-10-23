@@ -141,7 +141,6 @@ content-type: application/json
 x-auth: admin 
 
 { 
-    "uuid": "aabbccddff-0000-1111-aaaa-bbbbbbb00000",
     "title": "Mi producto ACTUALIZADO",
     "description": "Producto de prueba",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/en/b/b8/The_Chemical_Brothers_-_Surrender_album_cover.png",
