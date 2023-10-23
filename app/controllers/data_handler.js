@@ -117,7 +117,6 @@ function findProduct(query){
     const matchCategoryTitle = query.match(regexCategoryTitle);
     const matchCategory = query.match(regexCategory);
     const matchTitle = query.match(regexTitle);
-    console.log(matchTitle);
 
     // console.log("Matches:", matchCategoryTitle, matchCategory, matchTitle);
     var resultProducts = [];
