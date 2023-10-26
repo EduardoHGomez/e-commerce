@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Categoría A</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <!-- Font Awesome Link -->
+    <script src="https://kit.fontawesome.com/fffb4aa0e0.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Modal Ingresar-->
+    <div class="modal fade" id="modal_login" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitleId">Iniciar sesión</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <!-- Form para iniciar sesión -->
+                    <form>
+                        <label for="email_field" class="form-label">Correo</label>
+                        <div class="input-group mb-3">
+                            <input type="email" class="form-control" name="" id="email_field" aria-describedby="emailHelpId" placeholder="Ingresa tu correo" required>
+                            <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
+                        </div>
+                        <label for="password_field" class="form-label">Contraseña</label>
+                        <div class="input-group mb-3">
+                            <input type="password" class="form-control" name="" id="password_field" aria-describedby="emailHelpId" placeholder="Ingresa tu contraseña" required>
+                            <span class="input-group-text"><i class="fa-solid fa-key"></i></span>
+                        </div>
+                        <div style="text-align: center">
+                            <input type="submit" class="btn btn-primary" style="margin: auto" value="Login">
+                        </div>
+                    </form>
+                    
+                </div>
+                <div class="modal-footer">
+
+                    <!-- Motal footer 'Registrate aquí' -->
+                    <div class="input-group mb-3">
+                        <span>
+                            ¿No tienes cuenta? 
+                            <a style="text-decoration: blue" nav-link active" aria-current="page" href="" role="button"
+                            data-bs-toggle="modal" data-bs-target="#modal_register" 
+                            >
+                                Regístrate aquí
+                            </a>
+                        </span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</head>
+
+<body>
+    <header>
+        <!-- place navbar here -->
+        <!-- Nav bar -->
+        <nav class="navbar navbar-expand-lg navbar-dark " style="background-color: rgb(40,44,52);">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/P_01/P01_index.html"><i class="fa-solid fa-compact-disc fa-xl"></i> Inicio</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="P01_abouts_us.html">Sobre nosotros</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Productos 
+                            </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="P01_cat_A.html">Categoría A</a></li>
+                            <li><a class="dropdown-item" href="P01_cat_B.html">Categoría B</a></li>
+                        </ul>
+                        </li>
+                        <li class="nav-item ms-5">
+                            <form class="d-flex">
+                                <input class="form-control me-2" type="search" placeholder="Buscar productos" aria-label="Search">
+                                <button class="btn btn-outline-light" type="submit">Buscar</button>
+                            </form>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav ms-auto me-5">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="" role="button"
+                            data-bs-toggle="modal" data-bs-target="#modal_login" 
+                            >
+                                <i class="fa-solid fa-user"></i> Ingresar 
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/P_01/P01_cart.html"><i class="fa-solid fa-cart-shopping"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Nav bar -->
+    </header>
+    <main>
+
+        <h1 style="text-align: center;">Categoría A</h1>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="card">
+                        <img class="card-img-top" src="https://upload.wikimedia.org/wikipedia/commons/0/00/Beach_House_-_Depression_Cherry.png" alt="Title">
+                        <div class="card-body">
+                            <h4 class="card-title">Depression cherry</h4>
+                            <p class="card-text"><b>Artista: </b>Beach House</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="card">
+                        <img class="card-img-top" src="https://upload.wikimedia.org/wikipedia/en/a/a2/Beach_House_-_Bloom.png" alt="Title">
+                        <div class="card-body">
+                            <h4 class="card-title">Bloom</h4>
+                            <p class="card-text"><b>Artista: </b>Beach House</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="card">
+                        <img class="card-img-top" src="https://media.newyorker.com/photos/597a187cc100c36587d577bf/1:1/w_1193,h_1193,c_limit/Listening-Booth-Tyler-the-Creator-Where-This-Flower-Blooms.jpg" alt="Title">
+                        <div class="card-body">
+                            <h4 class="card-title">Flower boy</h4>
+                            <p class="card-text"><b>Artista: </b>Tyler, the Creator</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="card">
+                        <img class="card-img-top" src="https://i.scdn.co/image/ab67616d0000b273aaeb5c9fb6131977995b7f0e" alt="Title">
+                        <div class="card-body">
+                            <h4 class="card-title">Minecraft Volume Alpha</h4>
+                            <p class="card-text"><b>Artista: </b>C418</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="card">
+                        <img class="card-img-top" src="https://m.media-amazon.com/images/I/611z-ZSvhvL._UF894,1000_QL80_.jpg" alt="Title">
+                        <div class="card-body">
+                            <h4 class="card-title">Minecraft Volume Beta</h4>
+                            <p class="card-text"><b>Artista: </b>C418</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>        
+
+    </main>
+    <footer>
+        <!-- place footer here -->
+        <nav aria-label="page navigation">
+        <ul class="pagination justify-content-center">
+            <li class="page-item disabled">
+            <a class="page-link" href="#" aria-label="previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+            </li>
+            <li class="page-item active" aria-current="page"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+            <a class="page-link" href="#" aria-label="next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+            </li>
+        </ul>
+        </nav>
+    </footer>
+    <!-- Bootstrap JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+        integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
+    </script>
+    </body>
+
+</html>
