@@ -7,6 +7,10 @@ const app = express()
 const port = 3000;
 app.use(express.json());
 
+// --------- Archivos locales -------------
+app.use(express.static('app'));
+app.use('/views', express.static('views'));
+
 // --------- Router importado -------------
 const router = require('./app/controllers/router.js'); 
 
