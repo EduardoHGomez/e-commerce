@@ -8,15 +8,24 @@ document.addEventListener('DOMContentLoaded', () => {
     // Asignar variables
     productAmountModal = document.getElementById('productAmountModal');
     productAmountModal.addEventListener('show.bs.modal', (event) => {
-        console.log(event.relatedTarget);
+        // Button = Elemento relacionado (card)
         var button = event.relatedTarget;
+
         var productName = button.dataset.productname; // Usar lowercase para dataset!
+
+        // Actualizar los datos del modal del producto
+        productAmountModal.dataset.uuid = event.dataset.uuid;
+
 
         var currentTitle = productAmountModal.querySelector('#productAmountModalHeader'); // Cómo utilizar getElemntById o class?
         currentTitle.innerHTML=`Cantidad a agregar para <span class="modalAlbumName">${productName}</span>:`;
     });
 
     // Añadir al carrito
+    let saveProductButton = document.querySelector('#saveProductButtonModal');
+    saveProductButton.addEventListener('click', () => {
+        saveToShoppingCart();
+    });
 });
 
 function loadProducts() {
@@ -36,7 +45,7 @@ function loadProducts() {
 }
 
 function saveToShoppingCart(productId) {
-
+    console.log("Hola");
 
 
 }
