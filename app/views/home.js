@@ -9,8 +9,10 @@ document.addEventListener('DOMContentLoaded', () => {
     productAmountModal = document.getElementById('productAmountModal');
     productAmountModal.addEventListener('show.bs.modal', (event) => {
         var button = event.relatedTarget;
-        var productName = button.dataset.productname; // Lo convierte a lowercase???
-        console.log(productName);
+        var productName = button.dataset.productname; // Usar lowercase para dataset!
+
+        var currentTitle = productAmountModal.querySelector('#productAmountModalHeader'); // Cómo utilizar getElemntById o class?
+        currentTitle.innerHTML=`Cantidad a agregar para ${productName}:`;
     });
 });
 
