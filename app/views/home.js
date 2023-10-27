@@ -14,8 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
         var productName = button.dataset.productname; // Usar lowercase para dataset!
 
         // Actualizar los datos del modal del producto
-        productAmountModal.dataset.uuid = event.dataset.uuid;
-
+        productAmountModal.dataset.uuid = button.dataset.uuid;
 
         var currentTitle = productAmountModal.querySelector('#productAmountModalHeader'); // Cómo utilizar getElemntById o class?
         currentTitle.innerHTML=`Cantidad a agregar para <span class="modalAlbumName">${productName}</span>:`;
@@ -44,9 +43,8 @@ function loadProducts() {
     };
 }
 
-function saveToShoppingCart(productId) {
-    console.log("Hola");
-
+function saveToShoppingCart() {
+    console.log(productAmountModal.dataset.uuid);
 
 }
 
@@ -69,7 +67,7 @@ function productListToHTML(data) {
                         <h4 class="card-title">${product.title}</h4>
                         <p class="card-text">${product.description}</p>
                         <button 
-                        type="button" data-productuuid=${product.uuid}
+                        type="button" data-uuid=${product.uuid}
                         data-bs-toggle="modal" data-bs-target="#productAmountModal" data-productname="${product.title}"
                         class="btn btn-secondary add-cart style="background-color: #3e84c1;">Agregar al carrito
                         </button>
