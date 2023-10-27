@@ -39,7 +39,10 @@ function productListToHTML(data) {
                     <div class="card-body">
                         <h4 class="card-title">${product.title}</h4>
                         <p class="card-text">${product.description}</p>
-                        <button class="btn btn-secondary add-cart style="background-color: #3e84c1;">Agregar al carrito</button>
+                        <button 
+                        type="button" data-bs-toggle="modal" data-bs-target="#productAmountModal"
+                        class="btn btn-secondary add-cart style="background-color: #3e84c1;">Agregar al carrito
+                        </button>
                     </div>
                 </div>
         `;
