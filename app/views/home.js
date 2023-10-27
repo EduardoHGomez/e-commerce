@@ -39,6 +39,7 @@ function productListToHTML(data) {
                     <div class="card-body">
                         <h4 class="card-title">${product.title}</h4>
                         <p class="card-text">${product.description}</p>
+                        <button>Agregar al carrito</button>
                     </div>
                 </div>
         `;
