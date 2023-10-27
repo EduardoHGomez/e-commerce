@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
         var productName = button.dataset.productname; // Usar lowercase para dataset!
 
         var currentTitle = productAmountModal.querySelector('#productAmountModalHeader'); // Cómo utilizar getElemntById o class?
-        currentTitle.innerHTML=`Cantidad a agregar para ${productName}:`;
+        currentTitle.innerHTML=`Cantidad a agregar para <span class="modalAlbumName">${productName}</span>:`;
     });
 });
 
