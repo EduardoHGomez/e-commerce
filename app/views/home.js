@@ -19,8 +19,6 @@ function loadProducts() {
             productListToHTML(data);
         }
     };
-
-
 }
 
 
