@@ -34,3 +34,9 @@
 .cart-buttons button{
     width: 60%;
 }
+
+.add-cart {
+    width: 100%;
+    background-color: #3e84c1 !important;
+    border: 0px;
+}
