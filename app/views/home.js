@@ -1,8 +1,17 @@
 const xhr = new XMLHttpRequest();
 
+let productAmountModal;
 document.addEventListener('DOMContentLoaded', () => {
     console.log("HTML Loaded");
     loadProducts();
+    
+    // Asignar variables
+    productAmountModal = document.getElementById('productAmountModal');
+    productAmountModal.addEventListener('show.bs.modal', (event) => {
+        var button = event.relatedTarget;
+        var productName = button.dataset.productname; // Lo convierte a lowercase???
+        console.log(productName);
+    });
 });
 
 function loadProducts() {
@@ -40,7 +49,7 @@ function productListToHTML(data) {
                         <h4 class="card-title">${product.title}</h4>
                         <p class="card-text">${product.description}</p>
                         <button 
-                        type="button" data-bs-toggle="modal" data-bs-target="#productAmountModal"
+                        type="button" data-bs-toggle="modal" data-bs-target="#productAmountModal" data-productname="${product.title}"
                         class="btn btn-secondary add-cart style="background-color: #3e84c1;">Agregar al carrito
                         </button>
                     </div>
