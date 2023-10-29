@@ -24,6 +24,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let saveProductButton = document.querySelector('#saveProductButtonModal');
     saveProductButton.addEventListener('click', () => {
         // Get uuid and amount
+        var uuid = productAmountModal.dataset.uuid;
+        var amount = productAmountModal.dataset.uuid;
         saveToShoppingCart();
     });
 });
@@ -44,11 +46,10 @@ function loadProducts() {
     };
 }
 
-function saveToShoppingCart() {
-    console.log(productAmountModal.dataset.uuid);
-    amoutn;
+function saveToShoppingCart(uuid, amount) {
+    console.log(uuid, amount);
 
-    sessionStorage.setItem("uuid", amount);
+    // sessionStorage.setItem("uuid", amount);
 
 }
 
