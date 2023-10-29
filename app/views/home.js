@@ -23,6 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Añadir al carrito
     let saveProductButton = document.querySelector('#saveProductButtonModal');
     saveProductButton.addEventListener('click', () => {
+        // Get uuid and amount
         saveToShoppingCart();
     });
 });
@@ -45,6 +46,9 @@ function loadProducts() {
 
 function saveToShoppingCart() {
     console.log(productAmountModal.dataset.uuid);
+    amoutn;
+
+    sessionStorage.setItem("uuid", amount);
 
 }
 
