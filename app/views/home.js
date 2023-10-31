@@ -47,9 +47,15 @@ function loadProducts() {
 }
 
 function saveToShoppingCart(uuid, amount) {
-    console.log(uuid, amount);
-    sessionStorage.setItem(uuid, amount);
-
+    // Get the item
+    var current_amount = sessionStorage.getItem(uuid);
+    if (current_amount === null) {
+        sessionStorage.setItem(uuid, parseInt(amount));
+    } else {
+        // Update value
+        current_amount += parseInt(amount);
+        sessionStorage.setItem(uuid, parseInt(amount));
+    }
 }
 
 
