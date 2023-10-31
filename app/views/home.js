@@ -27,6 +27,9 @@ document.addEventListener('DOMContentLoaded', () => {
         var uuid = productAmountModal.dataset.uuid;
         var amount = document.querySelector('#modalInput').value;
         saveToShoppingCart(uuid, amount);
+
+        // Change value of modal to 1 (default)
+        document.querySelector('#modalInput').value = '1';
     });
 });
 
@@ -56,6 +59,8 @@ function saveToShoppingCart(uuid, amount) {
         current_amount += parseInt(amount);
         sessionStorage.setItem(uuid, parseInt(amount));
     }
+
+    console.log(sessionStorage);
 }
 
 
