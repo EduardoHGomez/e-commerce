@@ -12,4 +12,12 @@ document.addEventListener('DOMContentLoaded', () => {
 // Cargar desde sessionStorage
 function loadCart() {
     console.log(sessionStorage);
+
+    let data = sessionStorage.shoppingCart;
+
+    data.forEach((product) => {
+
+    });
+
+
 }
