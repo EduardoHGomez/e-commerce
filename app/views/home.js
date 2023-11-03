@@ -1,12 +1,12 @@
 const xhr = new XMLHttpRequest();
 
-let productAmountModal;
 document.addEventListener('DOMContentLoaded', () => {
     console.log("HTML Loaded");
-    loadProducts();
+    // Crear un arreglo para los productos
+    createCart();
     
     // Asignar variables
-    productAmountModal = document.getElementById('productAmountModal');
+    let productAmountModal = document.getElementById('productAmountModal');
     productAmountModal.addEventListener('show.bs.modal', (event) => {
         // Button = Elemento relacionado (card)
         var button = event.relatedTarget;
@@ -33,7 +33,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-function loadProducts() {
+function createCart() {
+
+}
+
+function storeToCart() {
     // Functión: Cargar al DOM el json que se obtenga
     xhr.open('GET', '/products');
     xhr.setRequestHeader('Content-Type', 'application/json');
@@ -48,6 +52,18 @@ function loadProducts() {
         }
     };
 }
+
+function deletFromCart() {
+}
+
+function readCart() {
+}
+
+
+function initialize() {
+
+}
+
 
 function saveToShoppingCart(uuid, amount) {
     // Get the item
