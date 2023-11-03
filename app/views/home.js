@@ -38,10 +38,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Función que crea el arreglo 
 function createCart() {
-    sessionStorage.setItem('products', []);
+    sessionStorage.setItem('products', '');
 }
 
 function storeToCart(uuid, amount) {
+    // No es posible almacenar un arreglo en sessionStorage, por lo que se convertirá a String
+
+
     // Get the item
     var current_amount = sessionStorage.getItem(uuid);
     if (current_amount === null) {
@@ -59,7 +62,7 @@ function deletFromCart(uuid) {
     sessionStorage.removeItem(uuid);
 }
 
-function readCart() {
+function getCart() {
     // 
     return sessionStorage.getItem('products');
 }
@@ -83,6 +86,21 @@ function loadProducts() {
 
 // Al hacer click en el carrito, cargar los productos al carrito de compras
 function loadToServer() {
+    // Fetch call
+    var data = getCart();
+
+    xhr.open('POST', '/products/cart');
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify(data));
+    xhr.onload = function() {
+        if (xhr.status != 200) {
+            alert(xhr.status + ': ' + xhr.statusText); 
+        } else { 
+            // Cargar datos con base en el JSON regresado
+            var data = xhr.response;
+            productListToHTML(data);
+        }
+    };
 }
 
 function productListToHTML(data) {
