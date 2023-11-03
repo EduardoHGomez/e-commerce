@@ -81,6 +81,10 @@ function loadProducts() {
     };
 }
 
+// Al hacer click en el carrito, cargar los productos al carrito de compras
+function loadToServer() {
+}
+
 function productListToHTML(data) {
     // data = Arreglo de los productos 
     var container = document.getElementById('productsContainer');
