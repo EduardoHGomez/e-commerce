@@ -4,6 +4,9 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log("HTML Loaded");
     // Crear un arreglo para los productos
     createCart();
+
+    // Cargar los productos de la base de datos
+    loadProducts();
     
     // Asignar variables
     let productAmountModal = document.getElementById('productAmountModal');
@@ -33,11 +36,33 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+// Función que crea el arreglo 
 function createCart() {
-
+    sessionStorage.setItem('products', []);
 }
 
-function storeToCart() {
+function storeToCart(uuid, amount) {
+    // Get the item
+    var current_amount = sessionStorage.getItem(uuid);
+    if (current_amount === null) {
+        sessionStorage.setItem(uuid, parseInt(amount));
+    } else {
+        // Update value
+        current_amount += parseInt(amount);
+        sessionStorage.setItem(uuid, parseInt(amount));
+    }
+
+    console.log(sessionStorage);
+}
+
+function deletFromCart() {
+}
+
+function readCart() {
+}
+
+// Esta función regresa todos los productos en la base de datos
+function loadProducts() {
     // Functión: Cargar al DOM el json que se obtenga
     xhr.open('GET', '/products');
     xhr.setRequestHeader('Content-Type', 'application/json');
@@ -52,33 +77,6 @@ function storeToCart() {
         }
     };
 }
-
-function deletFromCart() {
-}
-
-function readCart() {
-}
-
-
-function initialize() {
-
-}
-
-
-function saveToShoppingCart(uuid, amount) {
-    // Get the item
-    var current_amount = sessionStorage.getItem(uuid);
-    if (current_amount === null) {
-        sessionStorage.setItem(uuid, parseInt(amount));
-    } else {
-        // Update value
-        current_amount += parseInt(amount);
-        sessionStorage.setItem(uuid, parseInt(amount));
-    }
-
-    console.log(sessionStorage);
-}
-
 
 function productListToHTML(data) {
     // data = Arreglo de los productos 
