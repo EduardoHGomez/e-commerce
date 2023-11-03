@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Get uuid and amount
         var uuid = productAmountModal.dataset.uuid;
         var amount = document.querySelector('#modalInput').value;
-        saveToShoppingCart(uuid, amount);
+        storeToCart(uuid, amount);
 
         // Change value of modal to 1 (default)
         document.querySelector('#modalInput').value = '1';
@@ -55,10 +55,13 @@ function storeToCart(uuid, amount) {
     console.log(sessionStorage);
 }
 
-function deletFromCart() {
+function deletFromCart(uuid) {
+    sessionStorage.removeItem(uuid);
 }
 
 function readCart() {
+    // 
+    return sessionStorage.getItem('products');
 }
 
 // Esta función regresa todos los productos en la base de datos
