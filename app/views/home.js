@@ -3,7 +3,7 @@ const xhr = new XMLHttpRequest();
 document.addEventListener('DOMContentLoaded', () => {
     console.log("HTML Loaded");
     // Crear un arreglo para los productos
-    createCart();
+    // createCart();
 
     // Cargar los productos de la base de datos
     loadProducts();
@@ -43,7 +43,7 @@ function createCart() {
 
 function storeToCart(uuid, amount) {
     // No es posible almacenar un arreglo en sessionStorage, por lo que se convertirá a String
-
+    // let currentProducts = JSON.parse(sessionStorage.getItem('products'));
 
     // Get the item
     var current_amount = sessionStorage.getItem(uuid);
@@ -63,6 +63,18 @@ function deletFromCart(uuid) {
 }
 
 function getCart() {
+var dataArray = [];
+
+// Loop through all keys in sessionStorage
+for (var i = 0; i < sessionStorage.length; i++) {
+  var key = sessionStorage.key(i);
+  var value = sessionStorage.getItem(key);
+    console.log(key);
+    console.log(value);
+}
+
+
+    
     // 
     return sessionStorage.getItem('products');
 }
