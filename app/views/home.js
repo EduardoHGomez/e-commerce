@@ -44,16 +44,20 @@ function createCart() {
 }
 
 function storeToCart(uuid, amount) {
+    console.log(uuid, amount);
     // let currentProducts = JSON.parse(sessionStorage.getItem('products'));
 
     // Get the item
     var current_amount = sessionStorage.getItem(uuid);
     if (current_amount === null) {
+        console.log("Here1");
         sessionStorage.setItem(uuid, parseInt(amount));
     } else {
         // Update value
+        console.log("Here2");
+        current_amount = parseInt(current_amount);
         current_amount += parseInt(amount);
-        sessionStorage.setItem(uuid, parseInt(amount));
+        sessionStorage.setItem(uuid, current_amount);
     }
 
     console.log(sessionStorage);
