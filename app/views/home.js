@@ -36,13 +36,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+// ------- CART FUNCTIONS --------------------
+
 // Función que crea el arreglo 
 function createCart() {
     sessionStorage.setItem('products', '');
 }
 
 function storeToCart(uuid, amount) {
-    // No es posible almacenar un arreglo en sessionStorage, por lo que se convertirá a String
     // let currentProducts = JSON.parse(sessionStorage.getItem('products'));
 
     // Get the item
@@ -63,28 +64,28 @@ function deletFromCart(uuid) {
 }
 
 function getCart() {
-var dataArray = [];
+    var products = {'products': []};
 
-// Loop through all keys in sessionStorage
-for (var i = 0; i < sessionStorage.length; i++) {
-  var key = sessionStorage.key(i);
-  var value = sessionStorage.getItem(key);
-    console.log(key);
-    console.log(value);
+    for (var i = 0; i < sessionStorage.length; i++) {
+        var uuid = sessionStorage.key(i);
+        var amount = sessionStorage.getItem(uuid);
+
+        var productObj = {};
+        productObj[uuid] = amount;
+        products.products.push(productObj);
+    }
+
+    console.log(products);
 }
 
+// Al hacer click en el carrito, cargar los productos al carrito de compras
+function loadToServer() {
+    // Fetch call
+    var data = getCart();
 
-    
-    // 
-    return sessionStorage.getItem('products');
-}
-
-// Esta función regresa todos los productos en la base de datos
-function loadProducts() {
-    // Functión: Cargar al DOM el json que se obtenga
-    xhr.open('GET', '/products');
+    xhr.open('POST', '/products/cart');
     xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.send();
+    xhr.send(JSON.stringify(data));
     xhr.onload = function() {
         if (xhr.status != 200) {
             alert(xhr.status + ': ' + xhr.statusText); 
@@ -96,14 +97,15 @@ function loadProducts() {
     };
 }
 
-// Al hacer click en el carrito, cargar los productos al carrito de compras
-function loadToServer() {
-    // Fetch call
-    var data = getCart();
 
-    xhr.open('POST', '/products/cart');
+// -------------- DOM FUNCTIONS -------------------
+
+// Esta función regresa todos los productos en la base de datos
+function loadProducts() {
+    // Functión: Cargar al DOM el json que se obtenga
+    xhr.open('GET', '/products');
     xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.send(JSON.stringify(data));
+    xhr.send();
     xhr.onload = function() {
         if (xhr.status != 200) {
             alert(xhr.status + ': ' + xhr.statusText); 
