@@ -95,8 +95,13 @@ function loadToServer() {
             alert(xhr.status + ': ' + xhr.statusText); 
         } else { 
             // Cargar datos con base en el JSON regresado
-            var response = xhr.response;
-            console.log(response);
+            console.log(xhr.response);
+            console.log(xhr.status);
+
+            if (xhr.status === 200) {
+                console.log("Hi");
+                window.location.href = 'http://localhost:3000/shopping_cart';
+            }
         }
     };
 }
