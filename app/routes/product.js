@@ -80,8 +80,6 @@ router.get('/:id', (req, res) => {
 router.post('/cart', (req, res) => {
     body = req.body; // Primero extraer body
 
-    console.log(body);
-
     let result = {'message': 'Todo bien'}; // Variable para enviar desde el servidor
     res.setHeader('Content-Type', 'application/json');
 

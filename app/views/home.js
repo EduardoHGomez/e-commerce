@@ -70,12 +70,16 @@ function getCart() {
         var uuid = sessionStorage.key(i);
         var amount = sessionStorage.getItem(uuid);
 
-        var productObj = {};
-        productObj[uuid] = amount;
+        var productObj = 
+        {
+            'uuid': uuid,
+            'amount': amount
+        };
         products.products.push(productObj);
     }
 
-    console.log(products);
+    return products;
+
 }
 
 // Al hacer click en el carrito, cargar los productos al carrito de compras
@@ -85,14 +89,14 @@ function loadToServer() {
 
     xhr.open('POST', '/products/cart');
     xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.send(JSON.stringify(data));
+    xhr.send(JSON.stringify(data.products));
     xhr.onload = function() {
         if (xhr.status != 200) {
             alert(xhr.status + ': ' + xhr.statusText); 
         } else { 
             // Cargar datos con base en el JSON regresado
-            var data = xhr.response;
-            productListToHTML(data);
+            var response = xhr.response;
+            console.log(response);
         }
     };
 }
