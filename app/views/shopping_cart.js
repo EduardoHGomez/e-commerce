@@ -28,14 +28,16 @@ function loadCart() {
                     <div class="input-group mb-3 w-50">
                         <span class="input-group-text">Cantidad: </span>
                         <input value="2" type="number" class="form-control" name="" required>
-                        <div class="change-amount-div">
-                            <span class="change-amount-pencil" type="button" data-uuid="${product.uuid}">
+                        <div class="change-amount-div" id="product-${product.uuid}">
+                            <span class="change-amount-pencil" type="button" data-uuid="${product.uuid}"
+                            onclick="edit('${product.uuid}')">
                             <i class="fa-solid fa-pen" style="color: #ffffff"></i></span>
-                            <span class="change-amount-confirm fa-md" type="button" data-uuid="${product.uuid}">
+                            <span class="change-amount-confirm fa-md" type="button" data-uuid="${product.uuid}"
+                            >
                             <i class="fa-solid fa-check" style="color: #ffffff;"></i></span>
-                            <span class="change-amount-cancel" type="button" data-uuid="${product.uuid}">
+                            <span class="change-amount-cancel" type="button" data-uuid="${product.uuid}"
+                            >
                             <i class="fa-solid fa-xmark fa-md" style="color: #ffffff;"></i></span>
-                            
                         </div>
                     </div>
                     <div class="input-group mb-3 w-50">
@@ -89,5 +91,10 @@ async function getProductAPI(uuid) {
     return JSON.parse(data);
 }
 
-
 // ctrl + `
+
+function edit(uuid) {
+    let container = document.querySelector(`#product-${uuid}`);
+    console.log(container);
+
+}
