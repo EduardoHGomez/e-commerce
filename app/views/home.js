@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // createCart();
 
     // Cargar los productos de la base de datos
-    loadProducts();
+    loadProducts(0);
     
     // Asignar variables
     let productAmountModal = document.getElementById('productAmountModal');
@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         var currentTitle = productAmountModal.querySelector('#productAmountModalHeader'); // Cómo utilizar getElemntById o class?
         currentTitle.innerHTML=`Cantidad a agregar para <span class="modalAlbumName">${productName}</span>:`;
+
     });
 
     // Añadir al carrito
@@ -34,6 +35,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // Change value of modal to 1 (default)
         document.querySelector('#modalInput').value = '1';
     });
+
+
 });
 
 
@@ -65,9 +68,9 @@ function loadToServer() {
 // -------------- DOM FUNCTIONS -------------------
 
 // Esta función regresa todos los productos en la base de datos
-function loadProducts() {
+function loadProducts(current_page) {
     // Functión: Cargar al DOM el json que se obtenga
-    xhr.open('GET', '/products');
+    xhr.open('GET', `/products?page=${current_page}`);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send();
     xhr.onload = function() {
@@ -110,6 +113,78 @@ function productListToHTML(data) {
         container.append(newCard);
 
     });
+}
+
+
+// ---------------- PAGINATOR -------------
+
+function paginatorHandler(numberPressed) {
+    numberPressed = parseInt(numberPressed);
+    
+    // Primero, eliminar los items de productsContainer actuales
+    let container = document.getElementById('productsContainer');
+    container.innerHTML = "";
+
+    // Obtener los productos usando la functión loadProducts()
+    loadProducts(0);
+
+}
+
+function paginatorInitialize() { 
+    console.log("HOLA");
+    let length = 0;
+    // Función para obtener cuántos elementos existen en la base de datos
+    xhr.open('GET', `/products/`);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onload = function() {
+        if (xhr.status != 200) {
+            alert(xhr.status + ': ' + xhr.statusText); 
+        } else { 
+            // Cargar datos con base en el JSON regresado
+            length = JSON.parse(xhr.response).length;
+            console.log(length);
+
+
+            // --------- Paginator elements -------------
+            let paginatorContainer = document.getElementById('paginatorContainer');
+
+            // Inicializar el bracket derecho
+            let paginatorRightBracket = document.createElement('li');
+            
+            // Primer edge case: solo existen cuatro elementos
+            if (length <= 4) {  // Deshabilitar el bracket derecho
+                paginatorRightBracket.classList.add('page-item', 'disabled');
+                paginatorRightBracket.innerHTML = `
+                    <a class="page-link" href="#" aria-label="previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>`;
+            }
+            // Caso normal ()
+            else { 
+                paginatorRightBracket.classList.add('page-item', 'disabled');
+                
+                // Añadir con base en la cantidad de elementos
+                for(let i = 0; i < length; i += 4) {
+                    let newPage = document.createElement('li');
+                    newPage.classList('page-item');
+                    newPage.innerHTML = `
+                        <a class="page-link" href="#">${i/4}</a>
+                    `;
+                }
+            }
+
+            // Insertar el bracket derecho
+            paginatorContainer.append(paginatorRightBracket);
+
+
+
+
+
+
+        }
+    };
+
+    xhr.send();
 
 
 }

@@ -20,11 +20,9 @@ router.get('/', (req, res) => {
         res.statusCode = 200;
         result = data;
     }  else if (params.page) {
+        
         var page = parseInt(params.page);
-        var paginatorResult = {
-            'products': [],
-            'current_page': 0
-        };
+        var paginatorResult = [];
 
         // -------- Paginator algorithm -----------
 
@@ -38,14 +36,20 @@ router.get('/', (req, res) => {
             upper_limit = data.length;
         }
 
-        // De todo el arreglo de data, obtener desde el límite inferior al superior
-        for (let i = lower_limit; i < upper_limit; i ++) {
-            console.log(data[i]);
+        // Si el límite inferior es mayor que la longitud, entonces regresar un error
+        if (lower_limit > data.length) {
+            res.statusCode = 400;
+            result = {'message': 'Elementos para paginator inexistente'};
+        } 
+        // Si los límites están correctos, entonces hacer el algoritmo
+        else {
+            // De todo el arreglo de data, obtener desde el límite inferior al superior
+            for (let i = lower_limit; i < upper_limit; i ++) {
+                paginatorResult.push(data[i]);
+            }
+            res.statusCode = 200;
+            result = paginatorResult;
         }
-
-        res.statusCode = 200;
-        result = data;
-
     }   else if (params.title && params.category) { // Si tiene query
         const query = `<${params.category}>: <${params.title}>`;
         var data = dataHandlerFile.findProduct(query);
@@ -54,7 +58,7 @@ router.get('/', (req, res) => {
             result = data;
         } else {
             res.statusCode = 404;
-        result = {'message': 'Query para <category>: <title> no encontrado'};
+            result = {'message': 'Query para <category>: <title> no encontrado'};
         }
     } else if (params.category) {
         const query = `<${params.category}>:` 
