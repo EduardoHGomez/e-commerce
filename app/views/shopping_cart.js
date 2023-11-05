@@ -46,23 +46,29 @@ function getShoppingCart() {
     let productsCart = getCart().products;
 
     productsCart.forEach((product) => {
-        xhr.open('GET', `/products/${product.uuid}`);
-        xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.send();
-        xhr.onload = function() {
-        console.log("123;");
-            console.log(xhr.responseText);
-            if (xhr.status != 200) {
-                alert(xhr.status + ': ' + xhr.statusText); 
-            } else { 
-                // Cargar datos con base en el JSON regresado
-                if (xhr.status === 200) {
-                    result.push(JSON.parse(xhr.responseText));
-                }
-            }
-        };
+        getProductAPI(product.uuid).then((product) => result.push(product));
     });
-    console.log(result);
+}
+
+async function getProductAPI(uuid) {
+    let data;
+
+    xhr.open('GET', `/products/${uuid}`, false);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onload = function() {
+        console.log(xhr.responseText);
+        if (xhr.status != 200) {
+            alert(xhr.status + ': ' + xhr.statusText); 
+        } else { 
+            // Cargar datos con base en el JSON regresado
+            if (xhr.status === 200) {
+                data = xhr.responseText;
+            }
+        }
+    };
+    xhr.send();
+
+    return JSON.parse(data);
 }
 
 
