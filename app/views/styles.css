@@ -45,12 +45,12 @@
     color: #04364A;
 }
 
-.change-amount-div{
+.change-amount-div {
     display: flex; 
     flex-direction: row;
 }
 
-.change-amount-pencil{
+.change-amount-pencil {
     margin-left: 1px;
     border: 1px solid #64CCC5; 
     background-color: #64CCC5;
@@ -58,7 +58,7 @@
     align-items: center; padding: 10px;
 }
 
-.change-amount-confirm{
+.change-amount-confirm {
     border: 1px solid #D2DE32; 
     background-color: #D2DE32;
     display: flex; justify-content: center; 
@@ -67,7 +67,7 @@
     display: none;
 }
 
-.change-amount-cancel{
+.change-amount-cancel {
     border: 1px solid #EA5455; 
     background-color: #EA5455;
     display: flex; justify-content: center; 
