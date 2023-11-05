@@ -29,8 +29,13 @@ function loadCart() {
                         <span class="input-group-text">Cantidad: </span>
                         <input value="2" type="number" class="form-control" name="" required>
                         <div class="change-amount-div">
-                            <span class="change-amount-pencil"
-                            type="button" ><i class="fa-solid fa-pen"></i></span>
+                            <span class="change-amount-pencil" type="button" data-uuid="${product.uuid}">
+                            <i class="fa-solid fa-pen" style="color: #ffffff"></i></span>
+                            <span class="change-amount-confirm fa-md" type="button" data-uuid="${product.uuid}">
+                            <i class="fa-solid fa-check" style="color: #ffffff;"></i></span>
+                            <span class="change-amount-cancel" type="button" data-uuid="${product.uuid}">
+                            <i class="fa-solid fa-xmark fa-md" style="color: #ffffff;"></i></span>
+                            
                         </div>
                     </div>
                     <div class="input-group mb-3 w-50">

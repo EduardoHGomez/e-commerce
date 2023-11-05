@@ -52,7 +52,26 @@
 
 .change-amount-pencil{
     margin-left: 1px;
-    border: 1px solid red; 
+    border: 1px solid #64CCC5; 
+    background-color: #64CCC5;
     display: flex; justify-content: center; 
     align-items: center; padding: 10px;
+}
+
+.change-amount-confirm{
+    border: 1px solid #D2DE32; 
+    background-color: #D2DE32;
+    display: flex; justify-content: center; 
+    align-items: center; 
+    width: 35px;
+    display: none;
+}
+
+.change-amount-cancel{
+    border: 1px solid #EA5455; 
+    background-color: #EA5455;
+    display: flex; justify-content: center; 
+    align-items: center; 
+    width: 35px;
+    display: none;
 }
