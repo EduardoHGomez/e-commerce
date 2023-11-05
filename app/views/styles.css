@@ -44,3 +44,15 @@
 .modalAlbumName {
     color: #04364A;
 }
+
+.change-amount-div{
+    display: flex; 
+    flex-direction: row;
+}
+
+.change-amount-pencil{
+    margin-left: 1px;
+    border: 1px solid red; 
+    display: flex; justify-content: center; 
+    align-items: center; padding: 10px;
+}

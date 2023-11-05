@@ -28,17 +28,14 @@ function loadCart() {
                     <div class="input-group mb-3 w-50">
                         <span class="input-group-text">Cantidad: </span>
                         <input value="2" type="number" class="form-control" name="" required>
-                        <span class="input-group-text" type="button" ><i class="fa-solid fa-pen"></i></span>
-                        <div style="display: flex; flex-direction: row;">
-                            <span style="border: 1px solid red; display: flex; justify-content: center; align-items: center; padding: 10px;"
-                            type="button" ><i class="fa-solid fa-pen"></i></span>
-                            <span style="border: 1px solid red; display: flex; justify-content: center; align-items: center; padding: 10px;"
+                        <div class="change-amount-div">
+                            <span class="change-amount-pencil"
                             type="button" ><i class="fa-solid fa-pen"></i></span>
                         </div>
                     </div>
                     <div class="input-group mb-3 w-50">
                         <span class="input-group-text">Precio: </span>
-                        <span class="input-group-text" style="background-color: white">${product.price}</span>
+                        <span class="input-group-text w-25" style="background-color: white">${product.pricePerUnit}</span>
                         <span class="input-group-text">MXN</span>
                     </div>
                 </div>
