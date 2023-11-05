@@ -52,8 +52,7 @@ function updateCart(uuid, amount) {
         sessionStorage.setItem(uuid, parseInt(amount));
     } else {
         // Update value
-        current_amount = parseInt(current_amount);
-        current_amount += parseInt(amount);
+        current_amount = parseInt(amount);
         sessionStorage.setItem(uuid, current_amount);
     }
 

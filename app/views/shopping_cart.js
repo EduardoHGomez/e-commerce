@@ -127,5 +127,7 @@ function hideButtons(uuid) {
     input.disabled = true;
 
     // Actualizar en sessionStorage
+    let current_amount = input.value;
+    updateCart(uuid, current_amount);
 
 }
