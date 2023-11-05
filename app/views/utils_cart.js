@@ -44,3 +44,18 @@ function getCart() {
     return products;
 
 }
+
+function updateCart(uuid, amount) {
+    // Get the item
+    var current_amount = sessionStorage.getItem(uuid);
+    if (current_amount === null) {
+        sessionStorage.setItem(uuid, parseInt(amount));
+    } else {
+        // Update value
+        current_amount = parseInt(current_amount);
+        current_amount += parseInt(amount);
+        sessionStorage.setItem(uuid, current_amount);
+    }
+
+    console.log(sessionStorage);
+}

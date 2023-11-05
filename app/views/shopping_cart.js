@@ -27,7 +27,7 @@ function loadCart() {
                     <h4>${product.title} <a role="button" class="btn btn-sm btn-danger"><i class="fa-solid fa-trash"></i></a></h4>
                     <div class="input-group mb-3 w-50" id="product-${product.uuid}">
                         <span class="input-group-text">Cantidad: </span>
-                        <input value="2" type="number" class="form-control" name="" disabled>
+                        <input value="${product.amount}" type="number" class="form-control" name="" disabled>
                         <div class="change-amount-div"> 
                             <span class="change-amount-pencil" type="button" data-uuid="${product.uuid}"
                             onclick="edit('${product.uuid}')">
@@ -55,11 +55,14 @@ function loadCart() {
 
 // MODIFY TO {product: {json}, amount: n}
 
+// Esta función regresa en un arreglo de la forma [JSON1, JSON2]
+// Donde cada JSON es un producto
 async function getShoppingCart() {
     let result = [];
+    // Cada elemento de productsCart es {'uuid': uuid, 'amount': n}
     let productsCart = getCart().products;
 
-    // De sessionStorage
+    // Por cada elemento del arreglo del carrito, obtener su información usando la ruta API
     productsCart.forEach((product) => {
         // Obtener del servidor el JSON dado un uuid
         getProductAPI(product.uuid).then((productAPI) =>  {
@@ -71,6 +74,7 @@ async function getShoppingCart() {
     return result;
 }
 
+// Llamada a http:// GET /products/:id (200) 
 async function getProductAPI(uuid) {
     let data;
 
@@ -121,4 +125,7 @@ function hideButtons(uuid) {
     confirm.style.display = 'none';
     cancel.style.display = 'none';
     input.disabled = true;
+
+    // Actualizar en sessionStorage
+
 }
