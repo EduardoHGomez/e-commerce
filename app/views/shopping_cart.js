@@ -29,10 +29,16 @@ function loadCart() {
                         <span class="input-group-text">Cantidad: </span>
                         <input value="2" type="number" class="form-control" name="" required>
                         <span class="input-group-text" type="button" ><i class="fa-solid fa-pen"></i></span>
+                        <div style="display: flex; flex-direction: row;">
+                            <span style="border: 1px solid red; display: flex; justify-content: center; align-items: center; padding: 10px;"
+                            type="button" ><i class="fa-solid fa-pen"></i></span>
+                            <span style="border: 1px solid red; display: flex; justify-content: center; align-items: center; padding: 10px;"
+                            type="button" ><i class="fa-solid fa-pen"></i></span>
+                        </div>
                     </div>
                     <div class="input-group mb-3 w-50">
                         <span class="input-group-text">Precio: </span>
-                        <input value="20.00" type="number" class="form-control" name="" required>
+                        <span class="input-group-text" style="background-color: white">${product.price}</span>
                         <span class="input-group-text">MXN</span>
                     </div>
                 </div>
@@ -43,12 +49,19 @@ function loadCart() {
 
 }
 
+// MODIFY TO {product: {json}, amount: n}
+
 async function getShoppingCart() {
     let result = [];
     let productsCart = getCart().products;
 
+    // De sessionStorage
     productsCart.forEach((product) => {
-        getProductAPI(product.uuid).then((product) => result.push(product));
+        // Obtener del servidor el JSON dado un uuid
+        getProductAPI(product.uuid).then((productAPI) =>  {
+            productAPI.amount = product.amount;
+            result.push(productAPI)
+        });
     });
 
     return result;
