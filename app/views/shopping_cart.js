@@ -20,12 +20,14 @@ function loadCart() {
             newProduct.classList.add('media');
             newProduct.classList.add('border');
             newProduct.classList.add('p-3');
+            newProduct.setAttribute('id', `product-${product.uuid}`);
 
             newProduct.innerHTML = `
                 <img class="me-5 mt-4 rounded" style="float: right; width: 100px;" src="${product.imageUrl}" alt="Title" >
                 <div class="media-body">
-                    <h4>${product.title} <a role="button" class="btn btn-sm btn-danger"><i class="fa-solid fa-trash"></i></a></h4>
-                    <div class="input-group mb-3 w-50" id="product-${product.uuid}">
+                    <h4>${product.title} <a role="button" class="btn btn-sm btn-danger"
+                    onclick="deleteItem('${product.uuid}')" ><i class="fa-solid fa-trash"></i></a></h4>
+                    <div class="input-group mb-3 w-50">
                         <span class="input-group-text">Cantidad: </span>
                         <input value="${product.amount}" type="number" class="form-control" name="" disabled>
                         <div class="change-amount-div"> 
@@ -129,5 +131,13 @@ function hideButtons(uuid) {
     // Actualizar en sessionStorage
     let current_amount = input.value;
     updateCart(uuid, current_amount);
+}
 
+function deleteItem(uuid) {
+    let container = document.querySelector('#productsContainer');
+    let product = container.querySelector(`#product-${uuid}`);
+
+    product.remove(product);
+    sessionStorage.removeItem(uuid);
+    console.log(sessionStorage);
 }
