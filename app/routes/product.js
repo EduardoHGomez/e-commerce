@@ -19,7 +19,34 @@ router.get('/', (req, res) => {
         var data = dataHandlerFile.getProducts();
         res.statusCode = 200;
         result = data;
-    } else if (params.title && params.category) { // Si tiene query
+    }  else if (params.page) {
+        var page = parseInt(params.page);
+        var paginatorResult = {
+            'products': [],
+            'current_page': 0
+        };
+
+        // -------- Paginator algorithm -----------
+
+        // Función para el Paginator
+        var data = dataHandlerFile.getProducts();
+        var lower_limit = page * 4;
+        var upper_limit = lower_limit + 4;
+
+        if (upper_limit > data.length) {
+            // Si el máximo se sale de la cantidad de items, actualizar 
+            upper_limit = data.length;
+        }
+
+        // De todo el arreglo de data, obtener desde el límite inferior al superior
+        for (let i = lower_limit; i < upper_limit; i ++) {
+            console.log(data[i]);
+        }
+
+        res.statusCode = 200;
+        result = data;
+
+    }   else if (params.title && params.category) { // Si tiene query
         const query = `<${params.category}>: <${params.title}>`;
         var data = dataHandlerFile.findProduct(query);
         if (data) { // Si se encontró algo

@@ -4,6 +4,7 @@ const path = require('path');
 
 const productRouter = require(path.resolve(__dirname + "../../routes/product.js"));
 const adminProductRouter = require(path.resolve(__dirname + "../../routes/admin_products.js"));
+const page = require(path.resolve(__dirname + "../../routes/admin_products.js"));
 
 const router = express.Router();
 

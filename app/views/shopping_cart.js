@@ -55,8 +55,6 @@ function loadCart() {
 
 }
 
-// MODIFY TO {product: {json}, amount: n}
-
 // Esta función regresa en un arreglo de la forma [JSON1, JSON2]
 // Donde cada JSON es un producto
 async function getShoppingCart() {

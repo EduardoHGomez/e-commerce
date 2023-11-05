@@ -20,6 +20,14 @@ GET  http://localhost:3000/products?title=Igor HTTP/1.1
 GET  http://localhost:3000/products?title=ABCD1234 HTTP/1.1
 
 
+### ----------- PRUEBAS PARA PAGINATOR ---------------
+GET  http://localhost:3000/products?page=1 HTTP/1.1
+
+### 
+GET  http://localhost:3000/products?page=2 HTTP/1.1
+
+
+
 
 
 ### 2. GET /products/:id (404) --> Con id inválido
