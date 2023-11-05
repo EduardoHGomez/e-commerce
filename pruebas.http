@@ -74,9 +74,6 @@ content-type: application/json
     }
 ]
 
-### GET Shopping Cart
-GET  http://localhost:3000/shopping_cart HTTP/1.1
-
 
 ### 4. admin/products (400) --> Sin el header e x-auth
 POST http://localhost:3000/admin/products HTTP/1.1
