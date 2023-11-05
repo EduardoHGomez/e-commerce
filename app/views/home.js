@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Cargar los productos de la base de datos
     loadProducts(0);
     
-    // Asignar variables
+    // ------------ MODAL ------------------
     let productAmountModal = document.getElementById('productAmountModal');
     productAmountModal.addEventListener('show.bs.modal', (event) => {
         // Button = Elemento relacionado (card)
@@ -36,6 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector('#modalInput').value = '1';
     });
 
+    paginatorInitialize();
 
 });
 
@@ -132,59 +133,47 @@ function paginatorHandler(numberPressed) {
 
 function paginatorInitialize() { 
     console.log("HOLA");
-    let length = 0;
-    // Función para obtener cuántos elementos existen en la base de datos
-    xhr.open('GET', `/products/`);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.onload = function() {
-        if (xhr.status != 200) {
-            alert(xhr.status + ': ' + xhr.statusText); 
-        } else { 
-            // Cargar datos con base en el JSON regresado
-            length = JSON.parse(xhr.response).length;
-            console.log(length);
+    length = 5;
+    // --------- Paginator elements -------------
+    let paginatorContainer = document.getElementById('paginatorContainer');
 
-
-            // --------- Paginator elements -------------
-            let paginatorContainer = document.getElementById('paginatorContainer');
-
-            // Inicializar el bracket derecho
-            let paginatorRightBracket = document.createElement('li');
-            
-            // Primer edge case: solo existen cuatro elementos
-            if (length <= 4) {  // Deshabilitar el bracket derecho
-                paginatorRightBracket.classList.add('page-item', 'disabled');
-                paginatorRightBracket.innerHTML = `
-                    <a class="page-link" href="#" aria-label="previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>`;
-            }
-            // Caso normal ()
-            else { 
-                paginatorRightBracket.classList.add('page-item', 'disabled');
-                
-                // Añadir con base en la cantidad de elementos
-                for(let i = 0; i < length; i += 4) {
-                    let newPage = document.createElement('li');
-                    newPage.classList('page-item');
-                    newPage.innerHTML = `
-                        <a class="page-link" href="#">${i/4}</a>
-                    `;
-                }
-            }
-
-            // Insertar el bracket derecho
-            paginatorContainer.append(paginatorRightBracket);
-
-
-
-
-
-
+    // Inicializar el bracket derecho
+    let paginatorRightBracket = document.createElement('li');
+    
+    // Primer edge case: solo existen cuatro elementos
+    if (length <= 4) {  // Deshabilitar el bracket derecho
+        let newPage = document.createElement('li');
+        newPage.classList.add('page-item', 'active');
+        newPage.innerHTML = `
+            <a class="page-link" href="#">1</a>
+        `;
+        paginatorContainer.append(newPage);
+        paginatorRightBracket.classList.add('page-item', 'disabled');
+        paginatorRightBracket.innerHTML = `
+            <a class="page-link" href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>`;
+    }
+    // Caso normal ()
+    else { 
+        paginatorRightBracket.classList.add('page-item');
+        paginatorRightBracket.innerHTML = `
+            <a class="page-link" href="#" aria-label="Next active">
+                <span aria-hidden="true">&raquo;</span>
+            </a>`;
+        
+        // Añadir con base en la cantidad de elementos
+        for(let i = 0; i < length; i += 4) {
+            let newPage = document.createElement('li');
+            newPage.classList.add('page-item');
+            newPage.innerHTML = `
+                <a class="page-link" href="#">${i/4 + 1}</a>
+            `;
+            paginatorContainer.append(newPage);
         }
-    };
+    }
 
-    xhr.send();
-
+    // Insertar el bracket derecho
+    paginatorContainer.append(paginatorRightBracket);
 
 }
