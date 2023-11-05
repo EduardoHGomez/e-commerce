@@ -28,6 +28,7 @@ function loadCart() {
                     <div class="input-group mb-3 w-50">
                         <span class="input-group-text">Cantidad: </span>
                         <input value="2" type="number" class="form-control" name="" required>
+                        <span class="input-group-text" type="button" ><i class="fa-solid fa-pen"></i></span>
                     </div>
                     <div class="input-group mb-3 w-50">
                         <span class="input-group-text">Precio: </span>
