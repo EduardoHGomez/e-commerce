@@ -185,6 +185,9 @@ function deleteItem(uuid) {
     let container = document.querySelector('#productsContainer');
     let product = container.querySelector(`#product-${uuid}`);
 
+    let newTotal = document.querySelector(`#totalProduct-${uuid}`);
+    newTotal.remove();
+
     product.remove(product);
     sessionStorage.removeItem(uuid);
     console.log(sessionStorage);
