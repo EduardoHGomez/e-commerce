@@ -145,6 +145,7 @@ function paginatorHandler(numberPressed) {
         leftBracket.classList.remove('disabled');
     } else if ((numberPressed * 4) === 4) {
         leftBracket.classList.add('disabled');
+        rightBracket.classList.remove('disabled');
     } else {
         rightBracket.classList.remove('disabled');
         leftBracket.classList.remove('disabled');

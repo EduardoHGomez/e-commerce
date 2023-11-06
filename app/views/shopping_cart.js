@@ -38,7 +38,7 @@ function loadCart() {
                     onclick="deleteFromCart('${product.uuid}')" ><i class="fa-solid fa-trash"></i></a></h4>
                     <div class="input-group mb-3 w-50">
                         <span class="input-group-text">Cantidad: </span>
-                        <input value="${product.amount}" type="number" class="form-control" name="" disabled>
+                        <input value="${product.amount}" type="number" class="form-control" name="" disabled min=0>
                         <div class="change-amount-div"> 
                             <span class="change-amount-pencil" type="button" data-uuid="${product.uuid}"
                             onclick="edit('${product.uuid}')">

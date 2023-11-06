@@ -48,6 +48,12 @@ function getCart() {
 }
 
 function updateCart(uuid, amount) {
+    if (amount === '0') {
+        deleteFromCart(uuid);
+        return;
+    }
+
+
     // Get the item
     var current_amount = sessionStorage.getItem(uuid);
     if (current_amount === null) {
