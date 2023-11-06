@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // createCart();
 
     // Cargar los productos de la base de datos
-    loadProducts(0);
+    paginatorInitialize();
     
     // ------------ MODAL ------------------
     let productAmountModal = document.getElementById('productAmountModal');
@@ -36,11 +36,10 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector('#modalInput').value = '1';
     });
 
-    paginatorInitialize();
-
 });
 
 
+// --------------- SHOPPING CART ------------------
 // Al hacer click en el carrito, cargar los productos al carrito de compras
 function loadToServer() {
     // Fetch call
@@ -68,10 +67,10 @@ function loadToServer() {
 
 // -------------- DOM FUNCTIONS -------------------
 
-// Esta función regresa todos los productos en la base de datos
-function loadProducts(current_page) {
+// Esta función regresa todos los productos en la base de datos e inicializa paginator
+function paginatorInitialize() {
     // Functión: Cargar al DOM el json que se obtenga
-    xhr.open('GET', `/products?page=${current_page}`);
+    xhr.open('GET', `/products`);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send();
     xhr.onload = function() {
@@ -80,7 +79,52 @@ function loadProducts(current_page) {
         } else { 
             // Cargar datos con base en el JSON regresado
             var data = xhr.response;
-            productListToHTML(data);
+            let length = JSON.parse(data).length;
+
+            // --------- Paginator elements -------------
+            let paginatorContainer = document.getElementById('paginatorContainer');
+
+            // Inicializar el bracket derecho
+            let paginatorRightBracket = document.createElement('li');
+            
+            // Primer edge case: solo existen cuatro elementos
+            if (length <= 4) {  // Deshabilitar el bracket derecho
+                let newPage = document.createElement('li');
+                newPage.classList.add('page-item', 'active');
+                newPage.innerHTML = `
+                    <a class="page-link" href="#">1</a>
+                `;
+                paginatorContainer.append(newPage);
+                paginatorRightBracket.classList.add('page-item', 'disabled');
+                paginatorRightBracket.innerHTML = `
+                    <a class="page-link" href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>`;
+            }
+            // Caso normal ()
+            else { 
+                paginatorRightBracket.classList.add('page-item');
+                paginatorRightBracket.innerHTML = `
+                    <a class="page-link" href="#" aria-label="Next active">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>`;
+                
+                // Añadir con base en la cantidad de elementos
+                for(let i = 0; i < length; i += 4) {
+                    let newPage = document.createElement('li');
+                    newPage.classList.add('page-item');
+                    newPage.innerHTML = `
+                        <a class="page-link" href="#">${i/4 + 1}</a>
+                    `;
+                    paginatorContainer.append(newPage);
+                }
+            }
+
+            // Insertar el bracket derecho
+            paginatorContainer.append(paginatorRightBracket);
+            
+            // ------------ IMPORTANTE: Cargar ahora los productos para el primer rango (0) ----------
+            loadPaginationElements(0);
         }
     };
 }
@@ -119,6 +163,22 @@ function productListToHTML(data) {
 
 // ---------------- PAGINATOR -------------
 
+function loadPaginationElements(current_page) {
+    // Functión: Cargar al DOM el json que se obtenga
+    xhr.open('GET', `/products?page=${current_page}`);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send();
+    xhr.onload = function() {
+        if (xhr.status != 200) {
+            alert(xhr.status + ': ' + xhr.statusText); 
+        } else { 
+            // Cargar datos con base en el JSON regresado
+            var data = xhr.response;
+            productListToHTML(data);
+        }
+    };
+}
+
 function paginatorHandler(numberPressed) {
     numberPressed = parseInt(numberPressed);
     
@@ -128,52 +188,5 @@ function paginatorHandler(numberPressed) {
 
     // Obtener los productos usando la functión loadProducts()
     loadProducts(0);
-
-}
-
-function paginatorInitialize() { 
-    console.log("HOLA");
-    length = 5;
-    // --------- Paginator elements -------------
-    let paginatorContainer = document.getElementById('paginatorContainer');
-
-    // Inicializar el bracket derecho
-    let paginatorRightBracket = document.createElement('li');
-    
-    // Primer edge case: solo existen cuatro elementos
-    if (length <= 4) {  // Deshabilitar el bracket derecho
-        let newPage = document.createElement('li');
-        newPage.classList.add('page-item', 'active');
-        newPage.innerHTML = `
-            <a class="page-link" href="#">1</a>
-        `;
-        paginatorContainer.append(newPage);
-        paginatorRightBracket.classList.add('page-item', 'disabled');
-        paginatorRightBracket.innerHTML = `
-            <a class="page-link" href="#" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-            </a>`;
-    }
-    // Caso normal ()
-    else { 
-        paginatorRightBracket.classList.add('page-item');
-        paginatorRightBracket.innerHTML = `
-            <a class="page-link" href="#" aria-label="Next active">
-                <span aria-hidden="true">&raquo;</span>
-            </a>`;
-        
-        // Añadir con base en la cantidad de elementos
-        for(let i = 0; i < length; i += 4) {
-            let newPage = document.createElement('li');
-            newPage.classList.add('page-item');
-            newPage.innerHTML = `
-                <a class="page-link" href="#">${i/4 + 1}</a>
-            `;
-            paginatorContainer.append(newPage);
-        }
-    }
-
-    // Insertar el bracket derecho
-    paginatorContainer.append(paginatorRightBracket);
 
 }
