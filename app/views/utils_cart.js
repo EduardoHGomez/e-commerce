@@ -22,8 +22,10 @@ function storeToCart(uuid, amount) {
     console.log(sessionStorage);
 }
 
-function deletFromCart(uuid) {
-    sessionStorage.removeItem(uuid);
+function deleteFromCart(uuid) {
+    // EDITAR AQUÍ AL BORRAR ELEMENTO
+    deleteItem(uuid);
+
 }
 
 function getCart() {

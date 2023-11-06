@@ -121,6 +121,7 @@ function paginatorHandler(numberPressed) {
     
     // Primero, eliminar los items de productsContainer actuales
     let container = document.getElementById('productsContainer');
+    let totalAmount = parseInt(container.dataset.totalAmount);
     container.innerHTML = "";
 
     // ------- Toggle active function ----------------
@@ -135,12 +136,45 @@ function paginatorHandler(numberPressed) {
     previous_page.classList.remove('active');
     pressed_page.classList.add('active');
 
+    // Brackets
+    let rightBracket = document.getElementById('page-next');
+    let leftBracket = document.getElementById('page-previous');
+
+    if ((numberPressed * 4) === totalAmount) {
+        rightBracket.classList.add('disabled');
+        leftBracket.classList.remove('disabled');
+    } else if ((numberPressed * 4) === 4) {
+        leftBracket.classList.add('disabled');
+    } else {
+        rightBracket.classList.remove('disabled');
+        leftBracket.classList.remove('disabled');
+    }
+
     // Actualizar el valor previo
     paginator.dataset.previous = numberPressed;
 
     // Cargar los elementos en ese rango
-    loadPaginationElements(numberPressed);
+    loadPaginationElements(numberPressed - 1);
 
+}
+
+function paginatorNext() {
+    let paginator = document.getElementById('paginatorContainer');
+    let current_page = parseInt(paginator.dataset.previous);
+    let new_number = current_page + 1; 
+
+    // Actualizar datos de paginator
+    paginatorHandler(`${new_number}`);
+    
+}
+
+function paginatorPrevious() {
+    let paginator = document.getElementById('paginatorContainer');
+    let current_page = parseInt(paginator.dataset.previous);
+    let new_number = current_page - 1; 
+
+    // Actualizar datos de paginator
+    paginatorHandler(`${new_number}`);
 }
 
 // Esta función regresa todos los productos en la base de datos e inicializa paginator
@@ -157,6 +191,9 @@ function paginatorInitialize() {
             var data = xhr.response;
             let length = JSON.parse(data).length;
 
+            // Generar una variable 'global' del tamaño del arreglo
+            document.querySelector('#productsContainer').dataset.totalAmount = length;
+
             // --------- Paginator elements -------------
             let paginatorContainer = document.getElementById('paginatorContainer');
 
@@ -168,12 +205,12 @@ function paginatorInitialize() {
                 let newPage = document.createElement('li');
                 newPage.setAttribute('id', `li-page-1`)
                 newPage.innerHTML = `
-                    <a id="product-1" class="page-link" href="#">1</a>
+                    <a id="page-1" class="page-link" href="#">1</a>
                 `;
                 paginatorContainer.append(newPage);
                 paginatorRightBracket.classList.add('page-item', 'disabled');
                 paginatorRightBracket.innerHTML = `
-                    <a class="page-link" href="#" aria-label="Next">
+                    <a id="page-next" onclick="javascript:paginatorNext()" class="page-link" href="#" aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>
                     </a>`;
             }
@@ -181,7 +218,7 @@ function paginatorInitialize() {
             else { 
                 paginatorRightBracket.classList.add('page-item');
                 paginatorRightBracket.innerHTML = `
-                    <a class="page-link" href="#" aria-label="Next active">
+                    <a id="page-next" onclick="javascript:paginatorNext()" class="page-link" href="#" aria-label="Next active">
                         <span aria-hidden="true">&raquo;</span>
                     </a>`;
                 

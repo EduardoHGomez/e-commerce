@@ -13,9 +13,18 @@ function loadCart() {
     
     // Obtener el arreglo de todos los JSON que están en el carrito
     getShoppingCart().then((products) => {
+        let totalContainer = document.querySelector('#totalContainer');
 
         // Del arreglo devuelto, crear el carrito
         products.forEach((product) => {
+            let newTotal = document.createElement('p');
+            newTotal.setAttribute('id', `totalProduct-${product.uuid}`);
+            newTotal.classList.add('totalInstance');
+
+            newTotal.innerHTML = `<b>${product.title} </b><span class="total-amount">${product.amount}</span> x $
+            <span class="total-price">${product.pricePerUnit}</span>`;
+            totalContainer.append(newTotal);
+
             let newProduct = document.createElement('div');
             newProduct.classList.add('media');
             newProduct.classList.add('border');
@@ -26,7 +35,7 @@ function loadCart() {
                 <img class="me-5 mt-4 rounded" style="float: right; width: 100px;" src="${product.imageUrl}" alt="Title" >
                 <div class="media-body">
                     <h4>${product.title} <a role="button" class="btn btn-sm btn-danger"
-                    onclick="deleteItem('${product.uuid}')" ><i class="fa-solid fa-trash"></i></a></h4>
+                    onclick="deleteFromCart('${product.uuid}')" ><i class="fa-solid fa-trash"></i></a></h4>
                     <div class="input-group mb-3 w-50">
                         <span class="input-group-text">Cantidad: </span>
                         <input value="${product.amount}" type="number" class="form-control" name="" disabled>
@@ -35,10 +44,10 @@ function loadCart() {
                             onclick="edit('${product.uuid}')">
                             <i class="fa-solid fa-pen" style="color: #ffffff"></i></span>
                             <span class="change-amount-confirm fa-md" type="button" data-uuid="${product.uuid}"
-                            onclick="hideButtons('${product.uuid}')">
+                            onclick="hideButtonsConfirm('${product.uuid}')">
                             <i class="fa-solid fa-check" style="color: #ffffff;"></i></span>
                             <span class="change-amount-cancel" type="button" data-uuid="${product.uuid}"
-                            onclick="hideButtons('${product.uuid}')">
+                            onclick="hideButtonsCancel('${product.uuid}')">
                             <i class="fa-solid fa-xmark fa-md" style="color: #ffffff;"></i></span>
                         </div>
                     </div>
@@ -51,6 +60,7 @@ function loadCart() {
             `;
             container.append(newProduct);
         });
+        updateTotal();
     });
 
 }
@@ -95,7 +105,7 @@ async function getProductAPI(uuid) {
     return JSON.parse(data);
 }
 
-// ctrl + `
+// ctrl + ` para comentar :o
 
 function edit(uuid) {
     let input_div = document.querySelector(`#product-${uuid}`);
@@ -112,7 +122,7 @@ function edit(uuid) {
     input.disabled = false;
 }
 
-function hideButtons(uuid) {
+function hideButtonsConfirm(uuid) {
     let input_div = document.querySelector(`#product-${uuid}`);
     let container = input_div.querySelector('.change-amount-div');
     let pencil = container.querySelector('.change-amount-pencil');
@@ -129,6 +139,46 @@ function hideButtons(uuid) {
     // Actualizar en sessionStorage
     let current_amount = input.value;
     updateCart(uuid, current_amount);
+
+    // Actualizar el total
+    let newTotal = document.querySelector(`#totalProduct-${uuid}`);
+    let newTotalAmount = newTotal.querySelector('.total-amount');
+    newTotalAmount.innerHTML = `${current_amount}`;
+
+    updateTotal();
+}
+
+function updateTotal() {
+    let allTotals = document.querySelectorAll('.totalInstance');
+    let total = 0;
+    allTotals.forEach((product) => {
+        var amount = parseInt(product.querySelector('.total-amount').innerHTML);
+        var price = parseFloat(product.querySelector('.total-price').innerHTML);
+        let number = amount * price;
+        total += number;
+    });
+
+    let totalCantidad = document.querySelector('#totalCantidad');
+    total = total.toFixed(2);
+    totalCantidad.innerHTML = total;
+    console.log(total);
+}
+
+function hideButtonsCancel(uuid) {
+    let input_div = document.querySelector(`#product-${uuid}`);
+    let container = input_div.querySelector('.change-amount-div');
+    let pencil = container.querySelector('.change-amount-pencil');
+    let confirm = container.querySelector('.change-amount-confirm');
+    let cancel = container.querySelector('.change-amount-cancel');
+    let input = input_div.querySelector('input');
+
+    // Ocultar botones de confirmar y cancelar. Mostrar lápiz
+    pencil.style.display = 'flex';
+    confirm.style.display = 'none';
+    cancel.style.display = 'none';
+    input.disabled = true;
+
+    input.value = sessionStorage.getItem(uuid);
 }
 
 function deleteItem(uuid) {
@@ -138,4 +188,5 @@ function deleteItem(uuid) {
     product.remove(product);
     sessionStorage.removeItem(uuid);
     console.log(sessionStorage);
+    updateTotal();
 }
