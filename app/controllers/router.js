@@ -47,6 +47,22 @@ router.get("/shopping_cart", (req, res) => {
     res.sendFile(path.resolve(__dirname + "/../views/shopping_cart.html"));
 });
 
+// About us route
+router.get("/about_us", (req, res) => {
+    res.sendFile(path.resolve(__dirname + "/../views/about_us.html"));
+});
+
+// Category A
+router.get("/categoryA", (req, res) => {
+    res.sendFile(path.resolve(__dirname + "/../views/categoryA.html"));
+});
+
+// Category B
+router.get("/categoryB", (req, res) => {
+    res.sendFile(path.resolve(__dirname + "/../views/categoryB.html"));
+});
+
+
 // Products
 router.use("/products", productRouter);
 
