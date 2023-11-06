@@ -66,69 +66,6 @@ function loadToServer() {
 
 
 // -------------- DOM FUNCTIONS -------------------
-
-// Esta función regresa todos los productos en la base de datos e inicializa paginator
-function paginatorInitialize() {
-    // Functión: Cargar al DOM el json que se obtenga
-    xhr.open('GET', `/products`);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.send();
-    xhr.onload = function() {
-        if (xhr.status != 200) {
-            alert(xhr.status + ': ' + xhr.statusText); 
-        } else { 
-            // Cargar datos con base en el JSON regresado
-            var data = xhr.response;
-            let length = JSON.parse(data).length;
-
-            // --------- Paginator elements -------------
-            let paginatorContainer = document.getElementById('paginatorContainer');
-
-            // Inicializar el bracket derecho
-            let paginatorRightBracket = document.createElement('li');
-            
-            // Primer edge case: solo existen cuatro elementos
-            if (length <= 4) {  // Deshabilitar el bracket derecho
-                let newPage = document.createElement('li');
-                newPage.classList.add('page-item', 'active');
-                newPage.innerHTML = `
-                    <a class="page-link" href="#">1</a>
-                `;
-                paginatorContainer.append(newPage);
-                paginatorRightBracket.classList.add('page-item', 'disabled');
-                paginatorRightBracket.innerHTML = `
-                    <a class="page-link" href="#" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>`;
-            }
-            // Caso normal ()
-            else { 
-                paginatorRightBracket.classList.add('page-item');
-                paginatorRightBracket.innerHTML = `
-                    <a class="page-link" href="#" aria-label="Next active">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>`;
-                
-                // Añadir con base en la cantidad de elementos
-                for(let i = 0; i < length; i += 4) {
-                    let newPage = document.createElement('li');
-                    newPage.classList.add('page-item');
-                    newPage.innerHTML = `
-                        <a class="page-link" href="#">${i/4 + 1}</a>
-                    `;
-                    paginatorContainer.append(newPage);
-                }
-            }
-
-            // Insertar el bracket derecho
-            paginatorContainer.append(paginatorRightBracket);
-            
-            // ------------ IMPORTANTE: Cargar ahora los productos para el primer rango (0) ----------
-            loadPaginationElements(0);
-        }
-    };
-}
-
 function productListToHTML(data) {
     // data = Arreglo de los productos 
     var container = document.getElementById('productsContainer');
@@ -161,8 +98,8 @@ function productListToHTML(data) {
 }
 
 
-// ---------------- PAGINATOR -------------
 
+// ---------------- PAGINATOR -------------
 function loadPaginationElements(current_page) {
     // Functión: Cargar al DOM el json que se obtenga
     xhr.open('GET', `/products?page=${current_page}`);
@@ -186,7 +123,90 @@ function paginatorHandler(numberPressed) {
     let container = document.getElementById('productsContainer');
     container.innerHTML = "";
 
-    // Obtener los productos usando la functión loadProducts()
-    loadProducts(0);
+    // ------- Toggle active function ----------------
+    // Actualizar paginator active
+    let paginator = document.getElementById('paginatorContainer')
+    let pressed_page = document.getElementById(`li-page-${numberPressed}`);
+    let previous = paginator.dataset.previous;
+
+    // Retirar el estado de active al valor previo y establecerlo al nuevo
+    let previous_page = document.getElementById(`li-page-${previous}`);
+
+    previous_page.classList.remove('active');
+    pressed_page.classList.add('active');
+
+    // Actualizar el valor previo
+    paginator.dataset.previous = numberPressed;
+
+    // Cargar los elementos en ese rango
+    loadPaginationElements(numberPressed);
 
 }
+
+// Esta función regresa todos los productos en la base de datos e inicializa paginator
+function paginatorInitialize() {
+    // Functión: Cargar al DOM el json que se obtenga
+    xhr.open('GET', `/products`);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send();
+    xhr.onload = function() {
+        if (xhr.status != 200) {
+            alert(xhr.status + ': ' + xhr.statusText); 
+        } else { 
+            // Cargar datos con base en el JSON regresado
+            var data = xhr.response;
+            let length = JSON.parse(data).length;
+
+            // --------- Paginator elements -------------
+            let paginatorContainer = document.getElementById('paginatorContainer');
+
+            // Inicializar el bracket derecho
+            let paginatorRightBracket = document.createElement('li');
+            
+            // Primer edge case: solo existen cuatro elementos
+            if (length <= 4) {  // Deshabilitar el bracket derecho
+                let newPage = document.createElement('li');
+                newPage.setAttribute('id', `li-page-1`)
+                newPage.innerHTML = `
+                    <a id="product-1" class="page-link" href="#">1</a>
+                `;
+                paginatorContainer.append(newPage);
+                paginatorRightBracket.classList.add('page-item', 'disabled');
+                paginatorRightBracket.innerHTML = `
+                    <a class="page-link" href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>`;
+            }
+            // Caso normal ()
+            else { 
+                paginatorRightBracket.classList.add('page-item');
+                paginatorRightBracket.innerHTML = `
+                    <a class="page-link" href="#" aria-label="Next active">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>`;
+                
+                // Añadir con base en la cantidad de elementos
+                for(let i = 0; i < length; i += 4) {
+                    let newPage = document.createElement('li');
+                    newPage.setAttribute('id', `li-page-${(i/4) + 1}`)
+                    if (i == 0) { 
+                        newPage.classList.add('page-item', 'active');
+                    } else {
+                        newPage.classList.add('page-item');
+                    }
+                    newPage.innerHTML = `
+                        <a id="page-${(i/4) + 1}"class="page-link" href="javascript: paginatorHandler(${(i/4) + 1})">${i/4 + 1}</a>
+                    `;
+                    paginatorContainer.append(newPage);
+                }
+            }
+
+            // Insertar el bracket derecho
+            paginatorContainer.append(paginatorRightBracket);
+            
+            // ------------ IMPORTANTE: Cargar ahora los productos para el primer rango (0) ----------
+            loadPaginationElements(0);
+        }
+    };
+}
+
