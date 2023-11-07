@@ -83,6 +83,8 @@ function productListToHTML(data) {
                     <div class="card-body">
                         <h4 class="card-title">${product.title}</h4>
                         <p class="card-text">${product.description}</p>
+                        <p data-price=${product.pricePerUnit}>Precio: ${product.pricePerUnit} MXN</p>
+                        <hr>
                         <button 
                         type="button" data-uuid=${product.uuid}
                         data-bs-toggle="modal" data-bs-target="#productAmountModal" data-productname="${product.title}"
