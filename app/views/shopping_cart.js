@@ -193,3 +193,8 @@ function deleteItem(uuid) {
     console.log(sessionStorage);
     updateTotal();
 }
+
+function fetchItem(uuid) {
+    fetch('http:')
+
+}
