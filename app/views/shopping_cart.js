@@ -199,7 +199,48 @@ function fetchItem(uuid) {
     then(response => response.json()).
     then(products => {
         products.forEach((product) => {
-            console.log(product);
+            let newTotal = document.createElement('p');
+            newTotal.setAttribute('id', `totalProduct-${product.uuid}`);
+            newTotal.classList.add('totalInstance');
+
+            newTotal.innerHTML = `<b>${product.title} </b><span class="total-amount">${product.amount}</span> x $
+            <span class="total-price">${product.pricePerUnit}</span>`;
+            totalContainer.append(newTotal);
+
+            let newProduct = document.createElement('div');
+            newProduct.classList.add('media');
+            newProduct.classList.add('border');
+            newProduct.classList.add('p-3');
+            newProduct.setAttribute('id', `product-${product.uuid}`);
+
+            newProduct.innerHTML = `
+                <img class="me-5 mt-4 rounded" style="float: right; width: 100px;" src="${product.imageUrl}" alt="Title" >
+                <div class="media-body">
+                    <h4>${product.title} <a role="button" class="btn btn-sm btn-danger"
+                    onclick="deleteFromCart('${product.uuid}')" ><i class="fa-solid fa-trash"></i></a></h4>
+                    <div class="input-group mb-3 w-50">
+                        <span class="input-group-text">Cantidad: </span>
+                        <input value="${product.amount}" type="number" class="form-control" name="" disabled min=0>
+                        <div class="change-amount-div"> 
+                            <span class="change-amount-pencil" type="button" data-uuid="${product.uuid}"
+                            onclick="edit('${product.uuid}')">
+                            <i class="fa-solid fa-pen" style="color: #ffffff"></i></span>
+                            <span class="change-amount-confirm fa-md" type="button" data-uuid="${product.uuid}"
+                            onclick="hideButtonsConfirm('${product.uuid}')">
+                            <i class="fa-solid fa-check" style="color: #ffffff;"></i></span>
+                            <span class="change-amount-cancel" type="button" data-uuid="${product.uuid}"
+                            onclick="hideButtonsCancel('${product.uuid}')">
+                            <i class="fa-solid fa-xmark fa-md" style="color: #ffffff;"></i></span>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3 w-50">
+                        <span class="input-group-text">Precio: </span>
+                        <span class="input-group-text w-25" style="background-color: white">${product.pricePerUnit}</span>
+                        <span class="input-group-text">MXN</span>
+                    </div>
+                </div>
+            `;
+            container.append(newProduct);
         });
     });
 
