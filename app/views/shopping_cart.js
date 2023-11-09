@@ -195,6 +195,12 @@ function deleteItem(uuid) {
 }
 
 function fetchItem(uuid) {
-    fetch('http:')
+    fetch('http://localhost:3000/products').
+    then(response => response.json()).
+    then(products => {
+        products.forEach((product) => {
+            console.log(product);
+        });
+    });
 
 }
